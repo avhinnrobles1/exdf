@@ -1,0 +1,144 @@
+{
+	"name": "UsageAnalyticsIngest_Runner",
+	"properties": {
+		"activities": [
+			{
+				"name": "Until Telemetry Date End",
+				"type": "Until",
+				"dependsOn": [
+					{
+						"activity": "Set Current Telemetry Date Start",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greaterOrEquals(adddays(variables('CurrentTelemetryDate'),0), adddays(pipeline().parameters.TelemetryDateEnd,1))",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Run Usage Analytics Ingest",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "UsageAnalyticsIngest1",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": true,
+								"parameters": {
+									"TelemetryDateFolder": {
+										"value": "@variables('CurrentTelemetryDate')",
+										"type": "Expression"
+									},
+									"RunBy": {
+										"value": "@pipeline().parameters.RunBy",
+										"type": "Expression"
+									}
+								}
+							}
+						},
+						{
+							"name": "Set Next Telemetry Date",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Wait For 30 seconds",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "NextTelemetryDate",
+								"value": {
+									"value": "@adddays(variables('CurrentTelemetryDate'), 1)",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Set Current Telemetry Date",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "Set Next Telemetry Date",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "CurrentTelemetryDate",
+								"value": {
+									"value": "@formatDateTime(variables('NextTelemetryDate'), 'yyyy-MM-dd')",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Wait For 30 seconds",
+							"type": "Wait",
+							"dependsOn": [
+								{
+									"activity": "Run Usage Analytics Ingest",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 30
+							}
+						}
+					],
+					"timeout": "7.00:00:00"
+				}
+			},
+			{
+				"name": "Set Current Telemetry Date Start",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "CurrentTelemetryDate",
+					"value": {
+						"value": "@formatDateTime(pipeline().parameters.TelemetryDateStart, 'yyyy-MM-dd')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"RunBy": {
+				"type": "string"
+			},
+			"TelemetryDateStart": {
+				"type": "string"
+			},
+			"TelemetryDateEnd": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"CurrentTelemetryDate": {
+				"type": "String"
+			},
+			"NextTelemetryDate": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Portals"
+		},
+		"annotations": []
+	}
+}
