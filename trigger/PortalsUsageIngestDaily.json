@@ -2,7 +2,7 @@
 	"name": "PortalsUsageIngestDaily",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Stopped",
+		"runtimeState": "Started",
 		"pipelines": [],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
