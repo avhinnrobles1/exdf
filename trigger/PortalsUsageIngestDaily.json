@@ -1,0 +1,17 @@
+{
+	"name": "PortalsUsageIngestDaily",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-04-06T01:00:00.000Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
