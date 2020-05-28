@@ -5,6 +5,9 @@
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "ProjectEX"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
