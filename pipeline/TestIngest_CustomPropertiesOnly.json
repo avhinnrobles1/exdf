@@ -1,0 +1,46 @@
+{
+	"name": "TestIngest_CustomPropertiesOnly",
+	"properties": {
+		"activities": [
+			{
+				"name": "ETL Stage Telemetry",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.blob",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE [PortalsUsageStaging].[PageViews]",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false
+				}
+			}
+		],
+		"parameters": {
+			"TelemetryDateFolder": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "Tests"
+		},
+		"annotations": []
+	}
+}
