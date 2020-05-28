@@ -186,7 +186,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -656,7 +656,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -1125,7 +1125,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -1594,7 +1594,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -3022,7 +3022,7 @@
 				"parameters": {
 					"AppInsightsDirectory": {
 						"type": "string",
-						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
 					"AppInsightsTopic": {
 						"type": "string",
@@ -3579,7 +3579,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -4960,7 +4960,7 @@
 				"parameters": {
 					"AppInsightsDirectory": {
 						"type": "string",
-						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
 					"AppInsightsTopic": {
 						"type": "string",
@@ -5574,7 +5574,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -6954,7 +6954,7 @@
 				"parameters": {
 					"AppInsightsDirectory": {
 						"type": "string",
-						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
 					"AppInsightsTopic": {
 						"type": "string",
@@ -7511,7 +7511,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -7537,7 +7537,7 @@
 				"parameters": {
 					"AppInsightsDirectory": {
 						"type": "string",
-						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
 					"AppInsightsTopic": {
 						"type": "string",
@@ -7557,7 +7557,7 @@
 							"value": "@concat(dataset().AppInsightsDirectory, '/', dataset().AppInsightsTopic, '/', dataset().TelemetryDate)",
 							"type": "Expression"
 						},
-						"container": "n21portalanalyticsblobstg"
+						"container": "ex-pex-ai-container"
 					}
 				},
 				"schema": {
@@ -7763,6 +7763,9 @@
 							}
 						}
 					}
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -7906,6 +7909,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalyticsStaging",
 					"table": "PageViews"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -8048,6 +8054,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalyticsStaging",
 					"table": "PageViewPerformance"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -8166,6 +8175,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalyticsStaging",
 					"table": "Event"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -8282,6 +8294,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViews"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -8398,6 +8413,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViews"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -8513,6 +8531,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViews"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -8629,6 +8650,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViews"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -8756,6 +8780,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViews"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -8898,6 +8925,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViewPerformance"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -9040,6 +9070,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViewPerformance"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -9182,6 +9215,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViewPerformance"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -9324,6 +9360,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "PageViewPerformance"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -9442,6 +9481,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "Event"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -9560,6 +9602,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "Event"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -9678,6 +9723,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "Event"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -9796,6 +9844,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "Event"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
@@ -9914,6 +9965,9 @@
 				"typeProperties": {
 					"schema": "UsageAnalytics",
 					"table": "Event"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				}
 			},
 			"dependsOn": []
