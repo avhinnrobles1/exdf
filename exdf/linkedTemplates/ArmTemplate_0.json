@@ -1,0 +1,2401 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "exdf"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AppInsightsBlobJson_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://exaistoragev2.blob.core.windows.net"
+		},
+		"AppInsightsBlobJson_MSI_LS_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://exaistoragev2.blob.core.windows.net"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AppInsightsBlobJson')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"serviceEndpoint": "[parameters('AppInsightsBlobJson_properties_typeProperties_serviceEndpoint')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AppInsightsBlobJson_MSI_LS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"serviceEndpoint": "[parameters('AppInsightsBlobJson_MSI_LS_properties_typeProperties_serviceEndpoint')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureSqlDatabase1_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationDataset_lkq')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "count",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "method",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "typeName",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "severityLevel",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "innermostExceptionType",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "innermostExceptionMessage",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "innermostExceptionThrownAtMethod",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "innermostExceptionThrownAtAssembly",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "exceptionGroup",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "problemId",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "exceptionType",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "assembly",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "outerExceptionMessage",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "outerExceptionType",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "failedUserCodeMethod",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					},
+					{
+						"name": "failedUserCodeAssembly",
+						"type": "varchar",
+						"precision": 0,
+						"scale": 0
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "parenttable"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDataset_lkq')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AppInsightsBlobJson",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"container": "ex-pex-ai-container"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"basicException": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"exceptionType": {
+										"type": "string"
+									},
+									"assembly": {
+										"type": "string"
+									},
+									"outerExceptionMessage": {
+										"type": "string"
+									},
+									"outerExceptionType": {
+										"type": "string"
+									},
+									"failedUserCodeMethod": {
+										"type": "string"
+									},
+									"failedUserCodeAssembly": {
+										"type": "string"
+									},
+									"innermostExceptionType": {
+										"type": "string"
+									},
+									"innermostExceptionMessage": {
+										"type": "string"
+									},
+									"innermostExceptionThrownAtMethod": {
+										"type": "string"
+									},
+									"innermostExceptionThrownAtAssembly": {
+										"type": "string"
+									},
+									"exceptionGroup": {
+										"type": "string"
+									},
+									"problemId": {
+										"type": "string"
+									},
+									"count": {
+										"type": "integer"
+									},
+									"method": {
+										"type": "string"
+									},
+									"hasFullStack": {
+										"type": "boolean"
+									},
+									"typeName": {
+										"type": "string"
+									},
+									"severityLevel": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"internal": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"documentVersion": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"context": {
+							"type": "object",
+							"properties": {
+								"application": {
+									"type": "object",
+									"properties": {
+										"version": {
+											"type": "string"
+										}
+									}
+								},
+								"data": {
+									"type": "object",
+									"properties": {
+										"eventTime": {
+											"type": "string"
+										},
+										"isSynthetic": {
+											"type": "boolean"
+										},
+										"samplingRate": {
+											"type": "number"
+										}
+									}
+								},
+								"cloud": {
+									"type": "object"
+								},
+								"device": {
+									"type": "object",
+									"properties": {
+										"type": {
+											"type": "string"
+										},
+										"roleName": {
+											"type": "string"
+										},
+										"roleInstance": {
+											"type": "string"
+										},
+										"screenResolution": {
+											"type": "object"
+										}
+									}
+								},
+								"session": {
+									"type": "object",
+									"properties": {
+										"isFirst": {
+											"type": "boolean"
+										}
+									}
+								},
+								"operation": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"parentId": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									}
+								},
+								"location": {
+									"type": "object",
+									"properties": {
+										"clientip": {
+											"type": "string"
+										},
+										"continent": {
+											"type": "string"
+										},
+										"country": {
+											"type": "string"
+										},
+										"province": {
+											"type": "string"
+										},
+										"city": {
+											"type": "string"
+										}
+									}
+								},
+								"custom": {
+									"type": "object",
+									"properties": {
+										"dimensions": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"FormattedMessage": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AppInsightsBlobJson')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsAppInsightsBlobJsonByDate_MSI_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AppInsightsBlobJson_MSI_LS",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"AppInsightsDirectory": {
+						"type": "string",
+						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+					},
+					"AppInsightsTopic": {
+						"type": "string",
+						"defaultValue": "PageViews"
+					},
+					"TelemetryDate": {
+						"type": "string",
+						"defaultValue": "0000-00-00"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": {
+							"value": "@concat(dataset().AppInsightsDirectory, '/', dataset().AppInsightsTopic, '/', dataset().TelemetryDate)",
+							"type": "Expression"
+						},
+						"container": "n21portalanalyticsblobstg"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"view": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string"
+									},
+									"count": {
+										"type": "integer"
+									},
+									"durationMetric": {
+										"type": "object",
+										"properties": {
+											"value": {
+												"type": "number"
+											},
+											"count": {
+												"type": "number"
+											},
+											"min": {
+												"type": "number"
+											},
+											"max": {
+												"type": "number"
+											},
+											"stdDev": {
+												"type": "number"
+											},
+											"sampledValue": {
+												"type": "number"
+											}
+										}
+									},
+									"url": {
+										"type": "string"
+									},
+									"urlData": {
+										"type": "object",
+										"properties": {
+											"base": {
+												"type": "string"
+											},
+											"host": {
+												"type": "string"
+											},
+											"hashTag": {
+												"type": "string"
+											},
+											"protocol": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"internal": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"documentVersion": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"context": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"type": "object",
+									"properties": {
+										"eventTime": {
+											"type": "string"
+										},
+										"isSynthetic": {
+											"type": "boolean"
+										},
+										"samplingRate": {
+											"type": "number"
+										}
+									}
+								},
+								"device": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"type": {
+											"type": "string"
+										},
+										"osVersion": {
+											"type": "string"
+										},
+										"deviceName": {
+											"type": "string"
+										},
+										"deviceModel": {
+											"type": "string"
+										},
+										"browser": {
+											"type": "string"
+										},
+										"browserVersion": {
+											"type": "string"
+										},
+										"screenResolution": {
+											"type": "object"
+										}
+									}
+								},
+								"user": {
+									"type": "object",
+									"properties": {
+										"anonId": {
+											"type": "string"
+										},
+										"authId": {
+											"type": "string"
+										},
+										"isAuthenticated": {
+											"type": "boolean"
+										}
+									}
+								},
+								"session": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"isFirst": {
+											"type": "boolean"
+										}
+									}
+								},
+								"operation": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"parentId": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									}
+								},
+								"location": {
+									"type": "object",
+									"properties": {
+										"clientip": {
+											"type": "string"
+										},
+										"continent": {
+											"type": "string"
+										},
+										"country": {
+											"type": "string"
+										}
+									}
+								},
+								"custom": {
+									"type": "object",
+									"properties": {
+										"dimensions": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"PortalId": {
+														"type": "string"
+													},
+													"PortalEnvironment": {
+														"type": "string"
+													},
+													"PageId": {
+														"type": "string"
+													},
+													"ContentGroupName": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AppInsightsBlobJson_MSI_LS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsIngestConfig_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Key",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CreatedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "LastModifiedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "LastModifiedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "IsDeleted",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Configuration"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsStagingEventTable_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalyticsStaging",
+					"table": "Event"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsStagingPageViewPerformanceTable_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "clientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "clientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "clientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "clientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "clientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "clientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "clientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "clientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalyticsStaging",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsStagingPageViewsTable_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ViewName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewDurationMetricValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ViewUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "CustomDimensionsEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "IngestedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "date"
+					},
+					{
+						"name": "AppInsightsDirectoryId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AppInsightsTopicId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TelemetryId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "IsAlreadyExists",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalyticsStaging",
+					"table": "PageViews"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_DefaultEnv_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_OtherEnv1_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_OtherEnv2_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_OtherEnv3_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_OtherEnv4_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewPerformanceTable_DefaultEnv_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ClientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv1_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ClientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv2_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ClientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv3_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ClientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_DefaultEnv_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "eventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "id",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "durationMetricValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "url",
+						"type": "nvarchar"
+					},
+					{
+						"name": "urlBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "urlHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "deviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "deviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "osVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "browser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "browserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "accountId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "anonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "sessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "isFirst",
+						"type": "bit"
+					},
+					{
+						"name": "operationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "operationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "continent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "country",
+						"type": "nvarchar"
+					},
+					{
+						"name": "province",
+						"type": "nvarchar"
+					},
+					{
+						"name": "city",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViews"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		}
+	]
+}

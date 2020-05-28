@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "exdf"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"value": ""
+		},
+		"AppInsightsBlobJson_properties_typeProperties_serviceEndpoint": {
+			"value": "https://exaistoragev2.blob.core.windows.net"
+		},
+		"AppInsightsBlobJson_MSI_LS_properties_typeProperties_serviceEndpoint": {
+			"value": "https://exaistoragev2.blob.core.windows.net"
+		},
+		"PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_TelemetryDateFolder": {
+			"value": "PreviousDate"
+		},
+		"PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_RunBy": {
+			"value": "System"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

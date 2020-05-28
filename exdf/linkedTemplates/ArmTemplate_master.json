@@ -1,0 +1,97 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "exdf"
+		},
+		"AzureSqlDatabase1_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDatabase1'"
+		},
+		"AppInsightsBlobJson_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://exaistoragev2.blob.core.windows.net"
+		},
+		"AppInsightsBlobJson_MSI_LS_properties_typeProperties_serviceEndpoint": {
+			"type": "string",
+			"defaultValue": "https://exaistoragev2.blob.core.windows.net"
+		},
+		"PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_TelemetryDateFolder": {
+			"type": "string",
+			"defaultValue": "PreviousDate"
+		},
+		"PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_RunBy": {
+			"type": "string",
+			"defaultValue": "System"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureSqlDatabase1_connectionString": {
+						"value": "[parameters('AzureSqlDatabase1_connectionString')]"
+					},
+					"AppInsightsBlobJson_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('AppInsightsBlobJson_properties_typeProperties_serviceEndpoint')]"
+					},
+					"AppInsightsBlobJson_MSI_LS_properties_typeProperties_serviceEndpoint": {
+						"value": "[parameters('AppInsightsBlobJson_MSI_LS_properties_typeProperties_serviceEndpoint')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_TelemetryDateFolder": {
+						"value": "[parameters('PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_TelemetryDateFolder')]"
+					},
+					"PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_RunBy": {
+						"value": "[parameters('PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_RunBy')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ArmTemplate_0')]"
+			]
+		}
+	]
+}
