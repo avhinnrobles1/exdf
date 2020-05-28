@@ -1,0 +1,216 @@
+{
+	"name": "CopyPipeline_lkq",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_lkq",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "ex-pex-ai-container//"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.parenttable"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['basicException'][0]['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['exceptionType']"
+								},
+								"sink": {
+									"name": "exceptionType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['assembly']"
+								},
+								"sink": {
+									"name": "assembly",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['outerExceptionMessage']"
+								},
+								"sink": {
+									"name": "outerExceptionMessage",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['outerExceptionType']"
+								},
+								"sink": {
+									"name": "outerExceptionType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['failedUserCodeMethod']"
+								},
+								"sink": {
+									"name": "failedUserCodeMethod",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['failedUserCodeAssembly']"
+								},
+								"sink": {
+									"name": "failedUserCodeAssembly",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['innermostExceptionType']"
+								},
+								"sink": {
+									"name": "innermostExceptionType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['innermostExceptionMessage']"
+								},
+								"sink": {
+									"name": "innermostExceptionMessage",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['innermostExceptionThrownAtMethod']"
+								},
+								"sink": {
+									"name": "innermostExceptionThrownAtMethod",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['innermostExceptionThrownAtAssembly']"
+								},
+								"sink": {
+									"name": "innermostExceptionThrownAtAssembly",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['exceptionGroup']"
+								},
+								"sink": {
+									"name": "exceptionGroup",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['problemId']"
+								},
+								"sink": {
+									"name": "problemId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['count']"
+								},
+								"sink": {
+									"name": "count",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['method']"
+								},
+								"sink": {
+									"name": "method",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['typeName']"
+								},
+								"sink": {
+									"name": "typeName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['basicException'][0]['severityLevel']"
+								},
+								"sink": {
+									"name": "severityLevel",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_lkq",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_lkq",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,11 @@
+{
+	"name": "AppInsightsBlobJson",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://exaistoragev2.blob.core.windows.net"
+		}
+	}
+}

@@ -1,0 +1,206 @@
+{
+	"name": "SourceDataset_lkq",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AppInsightsBlobJson",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "ex-pex-ai-container"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"basicException": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"exceptionType": {
+								"type": "string"
+							},
+							"assembly": {
+								"type": "string"
+							},
+							"outerExceptionMessage": {
+								"type": "string"
+							},
+							"outerExceptionType": {
+								"type": "string"
+							},
+							"failedUserCodeMethod": {
+								"type": "string"
+							},
+							"failedUserCodeAssembly": {
+								"type": "string"
+							},
+							"innermostExceptionType": {
+								"type": "string"
+							},
+							"innermostExceptionMessage": {
+								"type": "string"
+							},
+							"innermostExceptionThrownAtMethod": {
+								"type": "string"
+							},
+							"innermostExceptionThrownAtAssembly": {
+								"type": "string"
+							},
+							"exceptionGroup": {
+								"type": "string"
+							},
+							"problemId": {
+								"type": "string"
+							},
+							"count": {
+								"type": "integer"
+							},
+							"method": {
+								"type": "string"
+							},
+							"hasFullStack": {
+								"type": "boolean"
+							},
+							"typeName": {
+								"type": "string"
+							},
+							"severityLevel": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"internal": {
+					"type": "object",
+					"properties": {
+						"data": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"documentVersion": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"context": {
+					"type": "object",
+					"properties": {
+						"application": {
+							"type": "object",
+							"properties": {
+								"version": {
+									"type": "string"
+								}
+							}
+						},
+						"data": {
+							"type": "object",
+							"properties": {
+								"eventTime": {
+									"type": "string"
+								},
+								"isSynthetic": {
+									"type": "boolean"
+								},
+								"samplingRate": {
+									"type": "number"
+								}
+							}
+						},
+						"cloud": {
+							"type": "object"
+						},
+						"device": {
+							"type": "object",
+							"properties": {
+								"type": {
+									"type": "string"
+								},
+								"roleName": {
+									"type": "string"
+								},
+								"roleInstance": {
+									"type": "string"
+								},
+								"screenResolution": {
+									"type": "object"
+								}
+							}
+						},
+						"session": {
+							"type": "object",
+							"properties": {
+								"isFirst": {
+									"type": "boolean"
+								}
+							}
+						},
+						"operation": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"parentId": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								}
+							}
+						},
+						"location": {
+							"type": "object",
+							"properties": {
+								"clientip": {
+									"type": "string"
+								},
+								"continent": {
+									"type": "string"
+								},
+								"country": {
+									"type": "string"
+								},
+								"province": {
+									"type": "string"
+								},
+								"city": {
+									"type": "string"
+								}
+							}
+						},
+						"custom": {
+							"type": "object",
+							"properties": {
+								"dimensions": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"FormattedMessage": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
