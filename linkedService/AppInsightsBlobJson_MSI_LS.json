@@ -1,0 +1,10 @@
+{
+	"name": "AppInsightsBlobJson_MSI_LS",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"serviceEndpoint": "https://exaistoragev2.blob.core.windows.net"
+		}
+	}
+}
