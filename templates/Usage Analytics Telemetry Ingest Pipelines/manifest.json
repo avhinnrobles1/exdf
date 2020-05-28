@@ -1,0 +1,12 @@
+{
+	"name": "Usage Analytics Telemetry Ingest Pipelines",
+	"description": "This is the full ADF template containing all the pipelines needed for the Usage Analytics Application Insights Telemetry Ingest implementation.",
+	"documentation": "https://wtwdst.visualstudio.com/WTW.Architecture/_wiki/wikis/WTW.Architecture.wiki/549/Usage-Analytics",
+	"annotations": [
+		" WTW Usage Analytics"
+	],
+	"services": [
+		"Azure Data Factory"
+	],
+	"categories": []
+}
