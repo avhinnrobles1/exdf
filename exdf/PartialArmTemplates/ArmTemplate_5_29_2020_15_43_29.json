@@ -6,14 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "exdf"
-		},
-		"PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_TelemetryDateFolder": {
-			"type": "string",
-			"defaultValue": "PreviousDate"
-		},
-		"PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_RunBy": {
-			"type": "string",
-			"defaultValue": "System"
 		}
 	},
 	"variables": {
@@ -21,501 +13,154 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_OtherEnv1_DS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "ProjectEX"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ContextDataEventTime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "InternalDataId",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ViewName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewDurationMetricValue",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "ViewUrl",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewUrlDataBase",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewUrlDataHost",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceOSVersion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceBrowser",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceBrowserVersion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextUserAuthId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextUserAnonId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextSessionId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextSessionIsFirst",
-						"type": "bit"
-					},
-					{
-						"name": "ContextOperationId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextOperationParentId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextLocationContinent",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextLocationCountry",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CustomDimensionsPortalId",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CustomDimensionsEnvironment",
-						"type": "varchar"
-					},
-					{
-						"name": "TelemetryIngestBatchId",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "UsageAnalytics",
-					"table": "PageViews"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_OtherEnv2_DS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "ProjectEX"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ContextDataEventTime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "InternalDataId",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ViewName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewDurationMetricValue",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "ViewUrl",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewUrlDataBase",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewUrlDataHost",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceOSVersion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceBrowser",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceBrowserVersion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextUserAuthId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextUserAnonId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextSessionId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextSessionIsFirst",
-						"type": "bit"
-					},
-					{
-						"name": "ContextOperationId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextOperationParentId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextLocationContinent",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextLocationCountry",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CustomDimensionsPortalId",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CustomDimensionsEnvironment",
-						"type": "varchar"
-					},
-					{
-						"name": "TelemetryIngestBatchId",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "UsageAnalytics",
-					"table": "PageViews"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_OtherEnv3_DS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "ProjectEX"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ContextDataEventTime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "InternalDataId",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ViewName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewDurationMetricValue",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "ViewUrl",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewUrlDataBase",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewUrlDataHost",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceOSVersion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceBrowser",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceBrowserVersion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextUserAuthId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextUserAnonId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextSessionId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextSessionIsFirst",
-						"type": "bit"
-					},
-					{
-						"name": "ContextOperationId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextOperationParentId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextLocationContinent",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextLocationCountry",
-						"type": "nvarchar"
-					},
-					{
-						"name": "CustomDimensionsPortalId",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "CustomDimensionsEnvironment",
-						"type": "varchar"
-					},
-					{
-						"name": "TelemetryIngestBatchId",
-						"type": "uniqueidentifier"
-					}
-				],
-				"typeProperties": {
-					"schema": "UsageAnalytics",
-					"table": "PageViews"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_OtherEnv4_DS')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"folder": {
-					"name": "ProjectEX"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "ContextDataEventTime",
-						"type": "datetime",
-						"precision": 23,
-						"scale": 3
-					},
-					{
-						"name": "InternalDataId",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "ViewName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewDurationMetricValue",
-						"type": "float",
-						"precision": 15
-					},
-					{
-						"name": "ViewUrl",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewUrlDataBase",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ViewUrlDataHost",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceName",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceOSVersion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceBrowser",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextDeviceBrowserVersion",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextUserAuthId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextUserAnonId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextSessionId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextSessionIsFirst",
-						"type": "bit"
-					},
-					{
-						"name": "ContextOperationId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextOperationParentId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextLocationContinent",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextLocationCountry",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextCustomDimensionsPortalId",
-						"type": "varchar"
-					},
-					{
-						"name": "ContextCustomDimensionsPortalEnvironment",
-						"type": "varchar"
-					},
-					{
-						"name": "ContextCustomDimensionsPageId",
-						"type": "varchar"
-					},
-					{
-						"name": "ContextCustomDimensionsContentGroupName",
-						"type": "varchar"
-					},
-					{
-						"name": "TelemetryIngestBatchId",
-						"type": "uniqueidentifier"
-					},
-					{
-						"name": "TelemetryDate",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "UsageAnalytics",
-					"table": "PageViews"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/CopyPipeline_lkq')]",
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsGetConfig_Event')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy_lkq",
-						"type": "Copy",
+						"name": "Set Staging Columns Mapping",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "StagingColumnsMapping",
+							"value": {
+								"value": "@activity('Get Configuration').output.firstRow.StagingColumnsMapping",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Landing Columns Mapping",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "LandingColumnsMapping",
+							"value": {
+								"value": "@activity('Get Configuration').output.firstRow.LandingColumnsMapping",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Include Null Environment",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "IncludeNullEnvironment",
+							"value": {
+								"value": "@bool(activity('Get Configuration').output.firstRow.IncludeNullEnvironment)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Default Environment",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "DefaultEnvironment",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.DefaultEnvironment)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 1",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment1",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment1)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 2",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment2",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment2)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 3",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment3",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment3)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Get Configuration",
+						"type": "Lookup",
 						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
@@ -524,208 +169,1422 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [
-							{
-								"name": "Source",
-								"value": "ex-pex-ai-container//"
-							},
-							{
-								"name": "Destination",
-								"value": "dbo.parenttable"
-							}
-						],
+						"userProperties": [],
 						"typeProperties": {
 							"source": {
-								"type": "JsonSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"wildcardFileName": "*"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink"
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['basicException'][0]['id']"
-										},
-										"sink": {
-											"name": "id",
-											"type": "String"
+								"type": "AzureSqlSource",
+								"sqlReaderStoredProcedureName": "[[UsageAnalyticsStaging].[uspGetConfiguration]",
+								"storedProcedureParameters": {
+									"ConfigurationGroup": {
+										"type": "String",
+										"value": {
+											"value": "@pipeline().parameters.AppInsightsTopic",
+											"type": "Expression"
 										}
 									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['exceptionType']"
-										},
-										"sink": {
-											"name": "exceptionType",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['assembly']"
-										},
-										"sink": {
-											"name": "assembly",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['outerExceptionMessage']"
-										},
-										"sink": {
-											"name": "outerExceptionMessage",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['outerExceptionType']"
-										},
-										"sink": {
-											"name": "outerExceptionType",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['failedUserCodeMethod']"
-										},
-										"sink": {
-											"name": "failedUserCodeMethod",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['failedUserCodeAssembly']"
-										},
-										"sink": {
-											"name": "failedUserCodeAssembly",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['innermostExceptionType']"
-										},
-										"sink": {
-											"name": "innermostExceptionType",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['innermostExceptionMessage']"
-										},
-										"sink": {
-											"name": "innermostExceptionMessage",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['innermostExceptionThrownAtMethod']"
-										},
-										"sink": {
-											"name": "innermostExceptionThrownAtMethod",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['innermostExceptionThrownAtAssembly']"
-										},
-										"sink": {
-											"name": "innermostExceptionThrownAtAssembly",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['exceptionGroup']"
-										},
-										"sink": {
-											"name": "exceptionGroup",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['problemId']"
-										},
-										"sink": {
-											"name": "problemId",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['count']"
-										},
-										"sink": {
-											"name": "count",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['method']"
-										},
-										"sink": {
-											"name": "method",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['typeName']"
-										},
-										"sink": {
-											"name": "typeName",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['basicException'][0]['severityLevel']"
-										},
-										"sink": {
-											"name": "severityLevel",
-											"type": "String"
-										}
+									"ConfigurationKey": {
+										"type": "String",
+										"value": null
 									}
+								},
+								"queryTimeout": "02:00:00"
+							},
+							"dataset": {
+								"referenceName": "UsageAnalyticsIngestConfig_DS",
+								"type": "DatasetReference"
+							}
+						}
+					},
+					{
+						"name": "Set App Insights Directory",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
 								]
 							}
-						},
-						"inputs": [
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "AppInsightsDirectory",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.AppInsightsDirectory)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 4",
+						"type": "SetVariable",
+						"dependsOn": [
 							{
-								"referenceName": "SourceDataset_lkq",
-								"type": "DatasetReference",
-								"parameters": {}
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
 							}
 						],
-						"outputs": [
-							{
-								"referenceName": "DestinationDataset_lkq",
-								"type": "DatasetReference",
-								"parameters": {}
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment4",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment4)",
+								"type": "Expression"
 							}
-						]
+						}
+					},
+					{
+						"name": "Set Ingest Enabled",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "IngestEnabled",
+							"value": {
+								"value": "@bool(string(activity('Get Configuration').output.firstRow.IngestEnabled))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "If Ingest Enabled",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "Set Ingest Enabled",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 4",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set App Insights Directory",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 3",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 2",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Default Environment",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Include Null Environment",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Landing Columns Mapping",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Staging Columns Mapping",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Environment Column Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@variables('IngestEnabled')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Ingest Telemetry",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "UsageAnalyticsIngest_Event",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false,
+										"parameters": {
+											"AppInsightsDirectory": {
+												"value": "@variables('AppInsightsDirectory')",
+												"type": "Expression"
+											},
+											"AppInsightsTopic": {
+												"value": "@pipeline().parameters.AppInsightsTopic",
+												"type": "Expression"
+											},
+											"TelemetryDateFolder": {
+												"value": "@pipeline().parameters.TelemetryDateFolder",
+												"type": "Expression"
+											},
+											"StagingColumnsMapping": {
+												"value": "@json(variables('StagingColumnsMapping'))",
+												"type": "Expression"
+											},
+											"LandingColumnsMapping": {
+												"value": "@json(variables('LandingColumnsMapping'))",
+												"type": "Expression"
+											},
+											"IncludeNullEnvironment": {
+												"value": "@variables('IncludeNullEnvironment')",
+												"type": "Expression"
+											},
+											"DefaultEnvironment": {
+												"value": "@variables('DefaultEnvironment')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment1": {
+												"value": "@variables('ToOtherEnvironment1')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment2": {
+												"value": "@variables('ToOtherEnvironment2')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment3": {
+												"value": "@variables('ToOtherEnvironment3')",
+												"type": "Expression"
+											},
+											"RunBy": {
+												"value": "@pipeline().parameters.RunBy",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment4": {
+												"value": "@variables('ToOtherEnvironment4')",
+												"type": "Expression"
+											},
+											"ContextCustomDimensionsEnvironmentColumnName": {
+												"value": "@variables('ContextCustomDimensionsEnvironmentColumnName')",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Set Environment Column Name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ContextCustomDimensionsEnvironmentColumnName",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ContextCustomDimensionsEnvironmentColumnName)",
+								"type": "Expression"
+							}
+						}
 					}
 				],
+				"parameters": {
+					"AppInsightsTopic": {
+						"type": "string",
+						"defaultValue": "Event"
+					},
+					"TelemetryDateFolder": {
+						"type": "string"
+					},
+					"RunBy": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"StagingColumnsMapping": {
+						"type": "String"
+					},
+					"LandingColumnsMapping": {
+						"type": "String"
+					},
+					"IncludeNullEnvironment": {
+						"type": "Boolean"
+					},
+					"DefaultEnvironment": {
+						"type": "String"
+					},
+					"ToOtherEnvironment1": {
+						"type": "String"
+					},
+					"ToOtherEnvironment2": {
+						"type": "String"
+					},
+					"ToOtherEnvironment3": {
+						"type": "String"
+					},
+					"ToOtherEnvironment4": {
+						"type": "String"
+					},
+					"AppInsightsDirectory": {
+						"type": "String"
+					},
+					"IngestEnabled": {
+						"type": "Boolean"
+					},
+					"ContextCustomDimensionsEnvironmentColumnName": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsIngestConfig_DS')]",
+				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsIngest_Event')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsGetConfig_PageViewPerformance')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Set Staging Columns Mapping",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "StagingColumnsMapping",
+							"value": {
+								"value": "@activity('Get Configuration').output.firstRow.StagingColumnsMapping",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Landing Columns Mapping",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "LandingColumnsMapping",
+							"value": {
+								"value": "@activity('Get Configuration').output.firstRow.LandingColumnsMapping",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Include Null Environment",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "IncludeNullEnvironment",
+							"value": {
+								"value": "@bool(activity('Get Configuration').output.firstRow.IncludeNullEnvironment)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Default Environment",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "DefaultEnvironment",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.DefaultEnvironment)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 1",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment1",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment1)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 2",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment2",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment2)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 3",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment3",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment3)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Get Configuration",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderStoredProcedureName": "[[UsageAnalyticsStaging].[uspGetConfiguration]",
+								"storedProcedureParameters": {
+									"ConfigurationGroup": {
+										"type": "String",
+										"value": {
+											"value": "@pipeline().parameters.AppInsightsTopic",
+											"type": "Expression"
+										}
+									},
+									"ConfigurationKey": {
+										"type": "String",
+										"value": null
+									}
+								},
+								"queryTimeout": "02:00:00"
+							},
+							"dataset": {
+								"referenceName": "UsageAnalyticsIngestConfig_DS",
+								"type": "DatasetReference"
+							}
+						}
+					},
+					{
+						"name": "Set App Insights Directory",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "AppInsightsDirectory",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.AppInsightsDirectory)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 4",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment4",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment4)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Ingest Enabled",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "IngestEnabled",
+							"value": {
+								"value": "@bool(string(activity('Get Configuration').output.firstRow.IngestEnabled))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "If Ingest Enabled",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "Set Ingest Enabled",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 4",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set App Insights Directory",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 3",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 2",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Default Environment",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Include Null Environment",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Landing Columns Mapping",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Staging Columns Mapping",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Environment Column Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@variables('IngestEnabled')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Ingest Telemetry",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "UsageAnalyticsIngest_PageViewPerformance",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false,
+										"parameters": {
+											"AppInsightsDirectory": {
+												"value": "@variables('AppInsightsDirectory')",
+												"type": "Expression"
+											},
+											"AppInsightsTopic": {
+												"value": "@pipeline().parameters.AppInsightsTopic",
+												"type": "Expression"
+											},
+											"TelemetryDateFolder": {
+												"value": "@pipeline().parameters.TelemetryDateFolder",
+												"type": "Expression"
+											},
+											"StagingColumnsMapping": {
+												"value": "@json(variables('StagingColumnsMapping'))",
+												"type": "Expression"
+											},
+											"LandingColumnsMapping": {
+												"value": "@json(variables('LandingColumnsMapping'))",
+												"type": "Expression"
+											},
+											"IncludeNullEnvironment": {
+												"value": "@variables('IncludeNullEnvironment')",
+												"type": "Expression"
+											},
+											"DefaultEnvironment": {
+												"value": "@variables('DefaultEnvironment')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment1": {
+												"value": "@variables('ToOtherEnvironment1')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment2": {
+												"value": "@variables('ToOtherEnvironment2')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment3": {
+												"value": "@variables('ToOtherEnvironment3')",
+												"type": "Expression"
+											},
+											"RunBy": {
+												"value": "@pipeline().parameters.RunBy",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment4": {
+												"value": "@variables('ToOtherEnvironment4')",
+												"type": "Expression"
+											},
+											"ContextCustomDimensionsEnvironmentColumnName": {
+												"value": "@variables('ContextCustomDimensionsEnvironmentColumnName')",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Set Environment Column Name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ContextCustomDimensionsEnvironmentColumnName",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ContextCustomDimensionsEnvironmentColumnName)",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"AppInsightsTopic": {
+						"type": "string",
+						"defaultValue": "PageViews"
+					},
+					"TelemetryDateFolder": {
+						"type": "string"
+					},
+					"RunBy": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"StagingColumnsMapping": {
+						"type": "String"
+					},
+					"LandingColumnsMapping": {
+						"type": "String"
+					},
+					"IncludeNullEnvironment": {
+						"type": "Boolean"
+					},
+					"DefaultEnvironment": {
+						"type": "String"
+					},
+					"ToOtherEnvironment1": {
+						"type": "String"
+					},
+					"ToOtherEnvironment2": {
+						"type": "String"
+					},
+					"ToOtherEnvironment3": {
+						"type": "String"
+					},
+					"ToOtherEnvironment4": {
+						"type": "String"
+					},
+					"AppInsightsDirectory": {
+						"type": "String"
+					},
+					"IngestEnabled": {
+						"type": "Boolean"
+					},
+					"ContextCustomDimensionsEnvironmentColumnName": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsIngestConfig_DS')]",
+				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsIngest_PageViewPerformance')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsGetConfig_PageViews')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Set Staging Columns Mapping",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "StagingColumnsMapping",
+							"value": {
+								"value": "@activity('Get Configuration').output.firstRow.StagingColumnsMapping",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Landing Columns Mapping",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "LandingColumnsMapping",
+							"value": {
+								"value": "@activity('Get Configuration').output.firstRow.LandingColumnsMapping",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Include Null Environment",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "IncludeNullEnvironment",
+							"value": {
+								"value": "@bool(activity('Get Configuration').output.firstRow.IncludeNullEnvironment)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Default Environment",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "DefaultEnvironment",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.DefaultEnvironment)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 1",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment1",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment1)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 2",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment2",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment2)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 3",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment3",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment3)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Get Configuration",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"sqlReaderStoredProcedureName": "[[UsageAnalyticsStaging].[uspGetConfiguration]",
+								"storedProcedureParameters": {
+									"ConfigurationGroup": {
+										"type": "String",
+										"value": {
+											"value": "@pipeline().parameters.AppInsightsTopic",
+											"type": "Expression"
+										}
+									},
+									"ConfigurationKey": {
+										"type": "String",
+										"value": null
+									}
+								},
+								"queryTimeout": "02:00:00"
+							},
+							"dataset": {
+								"referenceName": "UsageAnalyticsIngestConfig_DS",
+								"type": "DatasetReference"
+							}
+						}
+					},
+					{
+						"name": "Set App Insights Directory",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "AppInsightsDirectory",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.AppInsightsDirectory)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set To Other Environment 4",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ToOtherEnvironment4",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment4)",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "If Ingest Enabled",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "Set Ingest Enabled",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 4",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set App Insights Directory",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 3",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 2",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set To Other Environment 1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Default Environment",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Include Null Environment",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Landing Columns Mapping",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Staging Columns Mapping",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Set Environment Column Name",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@variables('IngestEnabled')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Ingest Telemetry",
+									"type": "ExecutePipeline",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "UsageAnalyticsIngest_PageViews",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": false,
+										"parameters": {
+											"AppInsightsDirectory": {
+												"value": "@variables('AppInsightsDirectory')",
+												"type": "Expression"
+											},
+											"AppInsightsTopic": {
+												"value": "@pipeline().parameters.AppInsightsTopic",
+												"type": "Expression"
+											},
+											"TelemetryDateFolder": {
+												"value": "@pipeline().parameters.TelemetryDateFolder",
+												"type": "Expression"
+											},
+											"StagingColumnsMapping": {
+												"value": "@json(variables('StagingColumnsMapping'))",
+												"type": "Expression"
+											},
+											"LandingColumnsMapping": {
+												"value": "@json(variables('LandingColumnsMapping'))",
+												"type": "Expression"
+											},
+											"IncludeNullEnvironment": {
+												"value": "@variables('IncludeNullEnvironment')",
+												"type": "Expression"
+											},
+											"DefaultEnvironment": {
+												"value": "@variables('DefaultEnvironment')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment1": {
+												"value": "@variables('ToOtherEnvironment1')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment2": {
+												"value": "@variables('ToOtherEnvironment2')",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment3": {
+												"value": "@variables('ToOtherEnvironment3')",
+												"type": "Expression"
+											},
+											"RunBy": {
+												"value": "@pipeline().parameters.RunBy",
+												"type": "Expression"
+											},
+											"ToOtherEnvironment4": {
+												"value": "@variables('ToOtherEnvironment4')",
+												"type": "Expression"
+											},
+											"ContextCustomDimensionsEnvironmentColumnName": {
+												"value": "@variables('ContextCustomDimensionsEnvironmentColumnName')",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Set Ingest Enabled",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "IngestEnabled",
+							"value": {
+								"value": "@bool(string(activity('Get Configuration').output.firstRow.IngestEnabled))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set Environment Column Name",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Configuration",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ContextCustomDimensionsEnvironmentColumnName",
+							"value": {
+								"value": "@string(activity('Get Configuration').output.firstRow.ContextCustomDimensionsEnvironmentColumnName)",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"parameters": {
+					"AppInsightsTopic": {
+						"type": "string",
+						"defaultValue": "PageViews"
+					},
+					"TelemetryDateFolder": {
+						"type": "string"
+					},
+					"RunBy": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"StagingColumnsMapping": {
+						"type": "String"
+					},
+					"LandingColumnsMapping": {
+						"type": "String"
+					},
+					"IncludeNullEnvironment": {
+						"type": "Boolean"
+					},
+					"DefaultEnvironment": {
+						"type": "String"
+					},
+					"ToOtherEnvironment1": {
+						"type": "String"
+					},
+					"ToOtherEnvironment2": {
+						"type": "String"
+					},
+					"ToOtherEnvironment3": {
+						"type": "String"
+					},
+					"ToOtherEnvironment4": {
+						"type": "String"
+					},
+					"AppInsightsDirectory": {
+						"type": "String"
+					},
+					"IngestEnabled": {
+						"type": "Boolean"
+					},
+					"ContextCustomDimensionsEnvironmentColumnName": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsIngestConfig_DS')]",
+				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsIngest_PageViews')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsIngest')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Default If Telemetry Date Param Blank",
+						"type": "IfCondition",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@or(empty(pipeline().parameters.TelemetryDateFolder),equals(pipeline().parameters.TelemetryDateFolder,'PreviousDate'))",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "Set Telemetry Date Folder to Param Value",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "TelemetryDateFolder",
+										"value": {
+											"value": "@pipeline().parameters.TelemetryDateFolder",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "Set Telemetry Date Folder to Default",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "TelemetryDateFolder",
+										"value": {
+											"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Get Config Ingest PageViews",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Default If Telemetry Date Param Blank",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "UsageAnalyticsGetConfig_PageViews",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": false,
+							"parameters": {
+								"AppInsightsTopic": "PageViews",
+								"TelemetryDateFolder": {
+									"value": "@variables('TelemetryDateFolder')",
+									"type": "Expression"
+								},
+								"RunBy": {
+									"value": "@pipeline().parameters.RunBy",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					{
+						"name": "Get Config Ingest PageViewPerformance",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Default If Telemetry Date Param Blank",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "UsageAnalyticsGetConfig_PageViewPerformance",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": false,
+							"parameters": {
+								"AppInsightsTopic": "PageViewPerformance",
+								"TelemetryDateFolder": {
+									"value": "@variables('TelemetryDateFolder')",
+									"type": "Expression"
+								},
+								"RunBy": {
+									"value": "@pipeline().parameters.RunBy",
+									"type": "Expression"
+								}
+							}
+						}
+					},
+					{
+						"name": "Get Config Ingest Event",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Default If Telemetry Date Param Blank",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "UsageAnalyticsGetConfig_Event",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": false,
+							"parameters": {
+								"AppInsightsTopic": "Event",
+								"TelemetryDateFolder": {
+									"value": "@variables('TelemetryDateFolder')",
+									"type": "Expression"
+								},
+								"RunBy": {
+									"value": "@pipeline().parameters.RunBy",
+									"type": "Expression"
+								}
+							}
+						}
+					}
+				],
+				"parameters": {
+					"TelemetryDateFolder": {
+						"type": "string",
+						"defaultValue": "PreviousDate"
+					},
+					"RunBy": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"TelemetryDateFolder": {
+						"type": "String"
+					}
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsGetConfig_PageViews')]",
+				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsGetConfig_PageViewPerformance')]",
+				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsGetConfig_Event')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsIngest_Event')]",
@@ -811,8 +1670,7 @@
 						"outputs": [
 							{
 								"referenceName": "UsageAnalyticsStagingEventTable_DS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -1008,15 +1866,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingEventTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryEventTable_OtherEnv1_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -1234,15 +2090,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingEventTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryEventTable_OtherEnv2_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -1463,15 +2317,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingEventTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryEventTable_DefaultEnv_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -1689,15 +2541,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingEventTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryEventTable_OtherEnv3_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -1957,15 +2807,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingEventTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryEventTable_OtherEnv4_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -2666,7 +3514,15 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsAppInsightsBlobJsonByDate_MSI_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsStagingEventTable_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryEventTable_OtherEnv1_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryEventTable_OtherEnv2_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryEventTable_DefaultEnv_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryEventTable_OtherEnv3_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryEventTable_OtherEnv4_DS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsIngest_PageViewPerformance')]",
@@ -2752,8 +3608,7 @@
 						"outputs": [
 							{
 								"referenceName": "UsageAnalyticsStagingPageViewPerformanceTable_DS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -2949,15 +3804,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewPerformanceTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv1_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -3175,15 +4028,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewPerformanceTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv2_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -3404,15 +4255,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewPerformanceTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewPerformanceTable_DefaultEnv_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -3630,15 +4479,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewPerformanceTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv3_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -3898,15 +4745,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewPerformanceTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv3_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -4664,7 +5509,14 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsAppInsightsBlobJsonByDate_MSI_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsStagingPageViewPerformanceTable_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv1_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv2_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewPerformanceTable_DefaultEnv_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv3_DS')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsIngest_PageViews')]",
@@ -4750,8 +5602,7 @@
 						"outputs": [
 							{
 								"referenceName": "UsageAnalyticsStagingPageViewsTable_DS",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -4947,15 +5798,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewsTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewsTable_OtherEnv1_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -5173,15 +6022,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewsTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewsTable_OtherEnv2_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -5402,15 +6249,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewsTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewsTable_DefaultEnv_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -5628,15 +6473,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewsTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewsTable_OtherEnv3_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -5896,15 +6739,13 @@
 									"inputs": [
 										{
 											"referenceName": "UsageAnalyticsStagingPageViewsTable_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									],
 									"outputs": [
 										{
 											"referenceName": "UsageAnalyticsTelemetryPageViewsTable_OtherEnv4_DS",
-											"type": "DatasetReference",
-											"parameters": {}
+											"type": "DatasetReference"
 										}
 									]
 								},
@@ -6606,1618 +7447,2516 @@
 				"annotations": []
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsAppInsightsBlobJsonByDate_MSI_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsStagingPageViewsTable_DS')]",
 				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewsTable_OtherEnv1_DS')]",
 				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewsTable_OtherEnv2_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewsTable_DefaultEnv_DS')]",
 				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewsTable_OtherEnv3_DS')]",
 				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryPageViewsTable_OtherEnv4_DS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsGetConfig_Event')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsAppInsightsBlobJsonByDate_MSI_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "Set Staging Columns Mapping",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "StagingColumnsMapping",
-							"value": {
-								"value": "@activity('Get Configuration').output.firstRow.StagingColumnsMapping",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Landing Columns Mapping",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "LandingColumnsMapping",
-							"value": {
-								"value": "@activity('Get Configuration').output.firstRow.LandingColumnsMapping",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Include Null Environment",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "IncludeNullEnvironment",
-							"value": {
-								"value": "@bool(activity('Get Configuration').output.firstRow.IncludeNullEnvironment)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Default Environment",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "DefaultEnvironment",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.DefaultEnvironment)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 1",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment1",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment1)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 2",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment2",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment2)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 3",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment3",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment3)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Get Configuration",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[UsageAnalyticsStaging].[uspGetConfiguration]",
-								"storedProcedureParameters": {
-									"ConfigurationGroup": {
-										"type": "String",
-										"value": {
-											"value": "@pipeline().parameters.AppInsightsTopic",
-											"type": "Expression"
-										}
-									},
-									"ConfigurationKey": {
-										"type": "String",
-										"value": null
-									}
-								},
-								"queryTimeout": "02:00:00"
-							},
-							"dataset": {
-								"referenceName": "UsageAnalyticsIngestConfig_DS",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Set App Insights Directory",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "AppInsightsDirectory",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.AppInsightsDirectory)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 4",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment4",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment4)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Ingest Enabled",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "IngestEnabled",
-							"value": {
-								"value": "@bool(string(activity('Get Configuration').output.firstRow.IngestEnabled))",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "If Ingest Enabled",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "Set Ingest Enabled",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 4",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set App Insights Directory",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 3",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 2",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Default Environment",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Include Null Environment",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Landing Columns Mapping",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Staging Columns Mapping",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Environment Column Name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@variables('IngestEnabled')",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Ingest Telemetry",
-									"type": "ExecutePipeline",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"pipeline": {
-											"referenceName": "UsageAnalyticsIngest_Event",
-											"type": "PipelineReference"
-										},
-										"waitOnCompletion": false,
-										"parameters": {
-											"AppInsightsDirectory": {
-												"value": "@variables('AppInsightsDirectory')",
-												"type": "Expression"
-											},
-											"AppInsightsTopic": {
-												"value": "@pipeline().parameters.AppInsightsTopic",
-												"type": "Expression"
-											},
-											"TelemetryDateFolder": {
-												"value": "@pipeline().parameters.TelemetryDateFolder",
-												"type": "Expression"
-											},
-											"StagingColumnsMapping": {
-												"value": "@json(variables('StagingColumnsMapping'))",
-												"type": "Expression"
-											},
-											"LandingColumnsMapping": {
-												"value": "@json(variables('LandingColumnsMapping'))",
-												"type": "Expression"
-											},
-											"IncludeNullEnvironment": {
-												"value": "@variables('IncludeNullEnvironment')",
-												"type": "Expression"
-											},
-											"DefaultEnvironment": {
-												"value": "@variables('DefaultEnvironment')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment1": {
-												"value": "@variables('ToOtherEnvironment1')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment2": {
-												"value": "@variables('ToOtherEnvironment2')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment3": {
-												"value": "@variables('ToOtherEnvironment3')",
-												"type": "Expression"
-											},
-											"RunBy": {
-												"value": "@pipeline().parameters.RunBy",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment4": {
-												"value": "@variables('ToOtherEnvironment4')",
-												"type": "Expression"
-											},
-											"ContextCustomDimensionsEnvironmentColumnName": {
-												"value": "@variables('ContextCustomDimensionsEnvironmentColumnName')",
-												"type": "Expression"
-											}
-										}
-									}
-								}
-							]
-						}
-					},
-					{
-						"name": "Set Environment Column Name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ContextCustomDimensionsEnvironmentColumnName",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ContextCustomDimensionsEnvironmentColumnName)",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"parameters": {
-					"AppInsightsTopic": {
-						"type": "string",
-						"defaultValue": "Event"
-					},
-					"TelemetryDateFolder": {
-						"type": "string"
-					},
-					"RunBy": {
-						"type": "string"
-					}
+				"linkedServiceName": {
+					"referenceName": "AppInsightsBlobJson_MSI_LS",
+					"type": "LinkedServiceReference"
 				},
-				"variables": {
-					"StagingColumnsMapping": {
-						"type": "String"
-					},
-					"LandingColumnsMapping": {
-						"type": "String"
-					},
-					"IncludeNullEnvironment": {
-						"type": "Boolean"
-					},
-					"DefaultEnvironment": {
-						"type": "String"
-					},
-					"ToOtherEnvironment1": {
-						"type": "String"
-					},
-					"ToOtherEnvironment2": {
-						"type": "String"
-					},
-					"ToOtherEnvironment3": {
-						"type": "String"
-					},
-					"ToOtherEnvironment4": {
-						"type": "String"
-					},
+				"parameters": {
 					"AppInsightsDirectory": {
-						"type": "String"
+						"type": "string",
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
-					"IngestEnabled": {
-						"type": "Boolean"
-					},
-					"ContextCustomDimensionsEnvironmentColumnName": {
-						"type": "String"
-					}
-				},
-				"folder": {
-					"name": "ProjectEX"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsIngest_Event')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsGetConfig_PageViewPerformance')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Set Staging Columns Mapping",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "StagingColumnsMapping",
-							"value": {
-								"value": "@activity('Get Configuration').output.firstRow.StagingColumnsMapping",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Landing Columns Mapping",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "LandingColumnsMapping",
-							"value": {
-								"value": "@activity('Get Configuration').output.firstRow.LandingColumnsMapping",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Include Null Environment",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "IncludeNullEnvironment",
-							"value": {
-								"value": "@bool(activity('Get Configuration').output.firstRow.IncludeNullEnvironment)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Default Environment",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "DefaultEnvironment",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.DefaultEnvironment)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 1",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment1",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment1)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 2",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment2",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment2)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 3",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment3",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment3)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Get Configuration",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[UsageAnalyticsStaging].[uspGetConfiguration]",
-								"storedProcedureParameters": {
-									"ConfigurationGroup": {
-										"type": "String",
-										"value": {
-											"value": "@pipeline().parameters.AppInsightsTopic",
-											"type": "Expression"
-										}
-									},
-									"ConfigurationKey": {
-										"type": "String",
-										"value": null
-									}
-								},
-								"queryTimeout": "02:00:00"
-							},
-							"dataset": {
-								"referenceName": "UsageAnalyticsIngestConfig_DS",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Set App Insights Directory",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "AppInsightsDirectory",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.AppInsightsDirectory)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 4",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment4",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment4)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Ingest Enabled",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "IngestEnabled",
-							"value": {
-								"value": "@bool(string(activity('Get Configuration').output.firstRow.IngestEnabled))",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "If Ingest Enabled",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "Set Ingest Enabled",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 4",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set App Insights Directory",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 3",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 2",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Default Environment",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Include Null Environment",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Landing Columns Mapping",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Staging Columns Mapping",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Environment Column Name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@variables('IngestEnabled')",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Ingest Telemetry",
-									"type": "ExecutePipeline",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"pipeline": {
-											"referenceName": "UsageAnalyticsIngest_PageViewPerformance",
-											"type": "PipelineReference"
-										},
-										"waitOnCompletion": false,
-										"parameters": {
-											"AppInsightsDirectory": {
-												"value": "@variables('AppInsightsDirectory')",
-												"type": "Expression"
-											},
-											"AppInsightsTopic": {
-												"value": "@pipeline().parameters.AppInsightsTopic",
-												"type": "Expression"
-											},
-											"TelemetryDateFolder": {
-												"value": "@pipeline().parameters.TelemetryDateFolder",
-												"type": "Expression"
-											},
-											"StagingColumnsMapping": {
-												"value": "@json(variables('StagingColumnsMapping'))",
-												"type": "Expression"
-											},
-											"LandingColumnsMapping": {
-												"value": "@json(variables('LandingColumnsMapping'))",
-												"type": "Expression"
-											},
-											"IncludeNullEnvironment": {
-												"value": "@variables('IncludeNullEnvironment')",
-												"type": "Expression"
-											},
-											"DefaultEnvironment": {
-												"value": "@variables('DefaultEnvironment')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment1": {
-												"value": "@variables('ToOtherEnvironment1')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment2": {
-												"value": "@variables('ToOtherEnvironment2')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment3": {
-												"value": "@variables('ToOtherEnvironment3')",
-												"type": "Expression"
-											},
-											"RunBy": {
-												"value": "@pipeline().parameters.RunBy",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment4": {
-												"value": "@variables('ToOtherEnvironment4')",
-												"type": "Expression"
-											},
-											"ContextCustomDimensionsEnvironmentColumnName": {
-												"value": "@variables('ContextCustomDimensionsEnvironmentColumnName')",
-												"type": "Expression"
-											}
-										}
-									}
-								}
-							]
-						}
-					},
-					{
-						"name": "Set Environment Column Name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ContextCustomDimensionsEnvironmentColumnName",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ContextCustomDimensionsEnvironmentColumnName)",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"parameters": {
 					"AppInsightsTopic": {
 						"type": "string",
 						"defaultValue": "PageViews"
 					},
-					"TelemetryDateFolder": {
-						"type": "string"
-					},
-					"RunBy": {
-						"type": "string"
-					}
-				},
-				"variables": {
-					"StagingColumnsMapping": {
-						"type": "String"
-					},
-					"LandingColumnsMapping": {
-						"type": "String"
-					},
-					"IncludeNullEnvironment": {
-						"type": "Boolean"
-					},
-					"DefaultEnvironment": {
-						"type": "String"
-					},
-					"ToOtherEnvironment1": {
-						"type": "String"
-					},
-					"ToOtherEnvironment2": {
-						"type": "String"
-					},
-					"ToOtherEnvironment3": {
-						"type": "String"
-					},
-					"ToOtherEnvironment4": {
-						"type": "String"
-					},
-					"AppInsightsDirectory": {
-						"type": "String"
-					},
-					"IngestEnabled": {
-						"type": "Boolean"
-					},
-					"ContextCustomDimensionsEnvironmentColumnName": {
-						"type": "String"
-					}
-				},
-				"folder": {
-					"name": "ProjectEX"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsIngest_PageViewPerformance')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsGetConfig_PageViews')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Set Staging Columns Mapping",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "StagingColumnsMapping",
-							"value": {
-								"value": "@activity('Get Configuration').output.firstRow.StagingColumnsMapping",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Landing Columns Mapping",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "LandingColumnsMapping",
-							"value": {
-								"value": "@activity('Get Configuration').output.firstRow.LandingColumnsMapping",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Include Null Environment",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "IncludeNullEnvironment",
-							"value": {
-								"value": "@bool(activity('Get Configuration').output.firstRow.IncludeNullEnvironment)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Default Environment",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "DefaultEnvironment",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.DefaultEnvironment)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 1",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment1",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment1)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 2",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment2",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment2)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 3",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment3",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment3)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Get Configuration",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "7.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderStoredProcedureName": "[[UsageAnalyticsStaging].[uspGetConfiguration]",
-								"storedProcedureParameters": {
-									"ConfigurationGroup": {
-										"type": "String",
-										"value": {
-											"value": "@pipeline().parameters.AppInsightsTopic",
-											"type": "Expression"
-										}
-									},
-									"ConfigurationKey": {
-										"type": "String",
-										"value": null
-									}
-								},
-								"queryTimeout": "02:00:00"
-							},
-							"dataset": {
-								"referenceName": "UsageAnalyticsIngestConfig_DS",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						}
-					},
-					{
-						"name": "Set App Insights Directory",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "AppInsightsDirectory",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.AppInsightsDirectory)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set To Other Environment 4",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ToOtherEnvironment4",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment4)",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "If Ingest Enabled",
-						"type": "IfCondition",
-						"dependsOn": [
-							{
-								"activity": "Set Ingest Enabled",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 4",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set App Insights Directory",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 3",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 2",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set To Other Environment 1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Default Environment",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Include Null Environment",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Landing Columns Mapping",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Staging Columns Mapping",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Set Environment Column Name",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@variables('IngestEnabled')",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Ingest Telemetry",
-									"type": "ExecutePipeline",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"pipeline": {
-											"referenceName": "UsageAnalyticsIngest_PageViews",
-											"type": "PipelineReference"
-										},
-										"waitOnCompletion": false,
-										"parameters": {
-											"AppInsightsDirectory": {
-												"value": "@variables('AppInsightsDirectory')",
-												"type": "Expression"
-											},
-											"AppInsightsTopic": {
-												"value": "@pipeline().parameters.AppInsightsTopic",
-												"type": "Expression"
-											},
-											"TelemetryDateFolder": {
-												"value": "@pipeline().parameters.TelemetryDateFolder",
-												"type": "Expression"
-											},
-											"StagingColumnsMapping": {
-												"value": "@json(variables('StagingColumnsMapping'))",
-												"type": "Expression"
-											},
-											"LandingColumnsMapping": {
-												"value": "@json(variables('LandingColumnsMapping'))",
-												"type": "Expression"
-											},
-											"IncludeNullEnvironment": {
-												"value": "@variables('IncludeNullEnvironment')",
-												"type": "Expression"
-											},
-											"DefaultEnvironment": {
-												"value": "@variables('DefaultEnvironment')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment1": {
-												"value": "@variables('ToOtherEnvironment1')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment2": {
-												"value": "@variables('ToOtherEnvironment2')",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment3": {
-												"value": "@variables('ToOtherEnvironment3')",
-												"type": "Expression"
-											},
-											"RunBy": {
-												"value": "@pipeline().parameters.RunBy",
-												"type": "Expression"
-											},
-											"ToOtherEnvironment4": {
-												"value": "@variables('ToOtherEnvironment4')",
-												"type": "Expression"
-											},
-											"ContextCustomDimensionsEnvironmentColumnName": {
-												"value": "@variables('ContextCustomDimensionsEnvironmentColumnName')",
-												"type": "Expression"
-											}
-										}
-									}
-								}
-							]
-						}
-					},
-					{
-						"name": "Set Ingest Enabled",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "IngestEnabled",
-							"value": {
-								"value": "@bool(string(activity('Get Configuration').output.firstRow.IngestEnabled))",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Set Environment Column Name",
-						"type": "SetVariable",
-						"dependsOn": [
-							{
-								"activity": "Get Configuration",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"variableName": "ContextCustomDimensionsEnvironmentColumnName",
-							"value": {
-								"value": "@string(activity('Get Configuration').output.firstRow.ContextCustomDimensionsEnvironmentColumnName)",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"parameters": {
-					"AppInsightsTopic": {
+					"TelemetryDate": {
 						"type": "string",
-						"defaultValue": "PageViews"
-					},
-					"TelemetryDateFolder": {
-						"type": "string"
-					},
-					"RunBy": {
-						"type": "string"
-					}
-				},
-				"variables": {
-					"StagingColumnsMapping": {
-						"type": "String"
-					},
-					"LandingColumnsMapping": {
-						"type": "String"
-					},
-					"IncludeNullEnvironment": {
-						"type": "Boolean"
-					},
-					"DefaultEnvironment": {
-						"type": "String"
-					},
-					"ToOtherEnvironment1": {
-						"type": "String"
-					},
-					"ToOtherEnvironment2": {
-						"type": "String"
-					},
-					"ToOtherEnvironment3": {
-						"type": "String"
-					},
-					"ToOtherEnvironment4": {
-						"type": "String"
-					},
-					"AppInsightsDirectory": {
-						"type": "String"
-					},
-					"IngestEnabled": {
-						"type": "Boolean"
-					},
-					"ContextCustomDimensionsEnvironmentColumnName": {
-						"type": "String"
+						"defaultValue": "0000-00-00"
 					}
 				},
 				"folder": {
 					"name": "ProjectEX"
 				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsIngest_PageViews')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsIngest')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Default If Telemetry Date Param Blank",
-						"type": "IfCondition",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@or(empty(pipeline().parameters.TelemetryDateFolder),equals(pipeline().parameters.TelemetryDateFolder,'PreviousDate'))",
-								"type": "Expression"
-							},
-							"ifFalseActivities": [
-								{
-									"name": "Set Telemetry Date Folder to Param Value",
-									"type": "SetVariable",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "TelemetryDateFolder",
-										"value": {
-											"value": "@pipeline().parameters.TelemetryDateFolder",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"ifTrueActivities": [
-								{
-									"name": "Set Telemetry Date Folder to Default",
-									"type": "SetVariable",
-									"dependsOn": [],
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "TelemetryDateFolder",
-										"value": {
-											"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
-											"type": "Expression"
-										}
-									}
-								}
-							]
-						}
-					},
-					{
-						"name": "Get Config Ingest PageViews",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "Default If Telemetry Date Param Blank",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "UsageAnalyticsGetConfig_PageViews",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": false,
-							"parameters": {
-								"AppInsightsTopic": "PageViews",
-								"TelemetryDateFolder": {
-									"value": "@variables('TelemetryDateFolder')",
-									"type": "Expression"
-								},
-								"RunBy": {
-									"value": "@pipeline().parameters.RunBy",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Get Config Ingest PageViewPerformance",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "Default If Telemetry Date Param Blank",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "UsageAnalyticsGetConfig_PageViewPerformance",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": false,
-							"parameters": {
-								"AppInsightsTopic": "PageViewPerformance",
-								"TelemetryDateFolder": {
-									"value": "@variables('TelemetryDateFolder')",
-									"type": "Expression"
-								},
-								"RunBy": {
-									"value": "@pipeline().parameters.RunBy",
-									"type": "Expression"
-								}
-							}
-						}
-					},
-					{
-						"name": "Get Config Ingest Event",
-						"type": "ExecutePipeline",
-						"dependsOn": [
-							{
-								"activity": "Default If Telemetry Date Param Blank",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "UsageAnalyticsGetConfig_Event",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": false,
-							"parameters": {
-								"AppInsightsTopic": "Event",
-								"TelemetryDateFolder": {
-									"value": "@variables('TelemetryDateFolder')",
-									"type": "Expression"
-								},
-								"RunBy": {
-									"value": "@pipeline().parameters.RunBy",
-									"type": "Expression"
-								}
-							}
-						}
-					}
-				],
-				"parameters": {
-					"TelemetryDateFolder": {
-						"type": "string",
-						"defaultValue": "PreviousDate"
-					},
-					"RunBy": {
-						"type": "string"
-					}
-				},
-				"variables": {
-					"TelemetryDateFolder": {
-						"type": "String"
-					}
-				},
-				"folder": {
-					"name": "ProjectEX"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsGetConfig_PageViews')]",
-				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsGetConfig_PageViewPerformance')]",
-				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsGetConfig_Event')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PortalsUsageIngestDaily')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "UsageAnalyticsIngest",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"TelemetryDateFolder": "[parameters('PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_TelemetryDateFolder')]",
-							"RunBy": "[parameters('PortalsUsageIngestDaily_properties_UsageAnalyticsIngest_parameters_RunBy')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
+				"type": "Json",
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2020-05-29T01:00:00.000Z",
-						"timeZone": "UTC"
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": {
+							"value": "@concat(dataset().AppInsightsDirectory, '/', dataset().AppInsightsTopic, '/', dataset().TelemetryDate)",
+							"type": "Expression"
+						},
+						"container": "ex-pex-ai-container"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"view": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string"
+									},
+									"count": {
+										"type": "integer"
+									},
+									"durationMetric": {
+										"type": "object",
+										"properties": {
+											"value": {
+												"type": "number"
+											},
+											"count": {
+												"type": "number"
+											},
+											"min": {
+												"type": "number"
+											},
+											"max": {
+												"type": "number"
+											},
+											"stdDev": {
+												"type": "number"
+											},
+											"sampledValue": {
+												"type": "number"
+											}
+										}
+									},
+									"url": {
+										"type": "string"
+									},
+									"urlData": {
+										"type": "object",
+										"properties": {
+											"base": {
+												"type": "string"
+											},
+											"host": {
+												"type": "string"
+											},
+											"hashTag": {
+												"type": "string"
+											},
+											"protocol": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						},
+						"internal": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"documentVersion": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"context": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"type": "object",
+									"properties": {
+										"eventTime": {
+											"type": "string"
+										},
+										"isSynthetic": {
+											"type": "boolean"
+										},
+										"samplingRate": {
+											"type": "number"
+										}
+									}
+								},
+								"device": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"type": {
+											"type": "string"
+										},
+										"osVersion": {
+											"type": "string"
+										},
+										"deviceName": {
+											"type": "string"
+										},
+										"deviceModel": {
+											"type": "string"
+										},
+										"browser": {
+											"type": "string"
+										},
+										"browserVersion": {
+											"type": "string"
+										},
+										"screenResolution": {
+											"type": "object"
+										}
+									}
+								},
+								"user": {
+									"type": "object",
+									"properties": {
+										"anonId": {
+											"type": "string"
+										},
+										"authId": {
+											"type": "string"
+										},
+										"isAuthenticated": {
+											"type": "boolean"
+										}
+									}
+								},
+								"session": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"isFirst": {
+											"type": "boolean"
+										}
+									}
+								},
+								"operation": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"parentId": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									}
+								},
+								"location": {
+									"type": "object",
+									"properties": {
+										"clientip": {
+											"type": "string"
+										},
+										"continent": {
+											"type": "string"
+										},
+										"country": {
+											"type": "string"
+										}
+									}
+								},
+								"custom": {
+									"type": "object",
+									"properties": {
+										"dimensions": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"PortalId": {
+														"type": "string"
+													},
+													"PortalEnvironment": {
+														"type": "string"
+													},
+													"PageId": {
+														"type": "string"
+													},
+													"ContentGroupName": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsIngest')]"
-			]
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsIngestConfig_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Key",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CreatedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CreatedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "LastModifiedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "LastModifiedBy",
+						"type": "varchar"
+					},
+					{
+						"name": "IsDeleted",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Configuration"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsStagingEventTable_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalyticsStaging",
+					"table": "Event"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsStagingPageViewPerformanceTable_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "clientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "clientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "clientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "clientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "clientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "clientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "clientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "clientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalyticsStaging",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsStagingPageViewsTable_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ViewName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewDurationMetricValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ViewUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "CustomDimensionsEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "IngestedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "date"
+					},
+					{
+						"name": "AppInsightsDirectoryId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AppInsightsTopicId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TelemetryId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "IsAlreadyExists",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalyticsStaging",
+					"table": "PageViews"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_DefaultEnv_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_OtherEnv1_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_OtherEnv2_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_OtherEnv3_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryEventTable_OtherEnv4_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "EventName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsUserRoles",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardType",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsCardTitle",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Event"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewPerformanceTable_DefaultEnv_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ClientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv1_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ClientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv2_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ClientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewPerformanceTable_OtherEnv3_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
+					},
+					{
+						"name": "ClientPerformanceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceClientProcessValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceReceiveRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceSendRequestValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceTotalValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ClientPerformanceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ClientPerformanceUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViewPerformance"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_DefaultEnv_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "eventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "id",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "durationMetricValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "url",
+						"type": "nvarchar"
+					},
+					{
+						"name": "urlBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "urlHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "deviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "deviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "osVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "browser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "browserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "accountId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "anonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "sessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "isFirst",
+						"type": "bit"
+					},
+					{
+						"name": "operationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "operationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "continent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "country",
+						"type": "nvarchar"
+					},
+					{
+						"name": "province",
+						"type": "nvarchar"
+					},
+					{
+						"name": "city",
+						"type": "nvarchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViews"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_OtherEnv1_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ViewName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewDurationMetricValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ViewUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CustomDimensionsPortalId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CustomDimensionsEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViews"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_OtherEnv2_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ViewName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewDurationMetricValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ViewUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CustomDimensionsPortalId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CustomDimensionsEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViews"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_OtherEnv3_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ViewName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewDurationMetricValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ViewUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "CustomDimensionsPortalId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CustomDimensionsEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViews"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryPageViewsTable_OtherEnv4_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "ContextDataEventTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ViewName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewDurationMetricValue",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "ViewUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataBase",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ViewUrlDataHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceOSVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDeviceBrowserVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAuthId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextUserAnonId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPortalEnvironment",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsPageId",
+						"type": "varchar"
+					},
+					{
+						"name": "ContextCustomDimensionsContentGroupName",
+						"type": "varchar"
+					},
+					{
+						"name": "TelemetryIngestBatchId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "TelemetryDate",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "PageViews"
+				}
+			},
+			"dependsOn": []
 		}
 	]
 }

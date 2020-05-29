@@ -716,7 +716,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -1186,7 +1186,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -1656,7 +1656,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -1822,7 +1822,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -3210,7 +3210,7 @@
 				"parameters": {
 					"AppInsightsDirectory": {
 						"type": "string",
-						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
 					"AppInsightsTopic": {
 						"type": "string",
@@ -3767,7 +3767,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -5160,7 +5160,7 @@
 				"parameters": {
 					"AppInsightsDirectory": {
 						"type": "string",
-						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
 					"AppInsightsTopic": {
 						"type": "string",
@@ -5774,7 +5774,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -7166,7 +7166,7 @@
 				"parameters": {
 					"AppInsightsDirectory": {
 						"type": "string",
-						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
 					"AppInsightsTopic": {
 						"type": "string",
@@ -7723,7 +7723,7 @@
 					}
 				},
 				"folder": {
-					"name": "Portals"
+					"name": "ProjectEX"
 				},
 				"annotations": []
 			},
@@ -8084,7 +8084,7 @@
 				"parameters": {
 					"AppInsightsDirectory": {
 						"type": "string",
-						"defaultValue": "n21portalanalyticsdevappinsights_24217191a7f749f1bde7c270d326c8e5"
+						"defaultValue": "pex_c23a310da9f8453989803a629f7db787"
 					},
 					"AppInsightsTopic": {
 						"type": "string",
@@ -8095,6 +8095,9 @@
 						"defaultValue": "0000-00-00"
 					}
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "Json",
 				"typeProperties": {
@@ -8104,7 +8107,7 @@
 							"value": "@concat(dataset().AppInsightsDirectory, '/', dataset().AppInsightsTopic, '/', dataset().TelemetryDate)",
 							"type": "Expression"
 						},
-						"container": "n21portalanalyticsblobstg"
+						"container": "ex-pex-ai-container"
 					}
 				},
 				"schema": {
@@ -8325,6 +8328,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -8378,6 +8384,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -8498,6 +8507,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -8642,6 +8654,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -8788,6 +8803,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -8907,6 +8925,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -9028,6 +9049,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -9147,6 +9171,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -9268,6 +9295,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -9387,6 +9417,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -9532,6 +9565,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -9675,6 +9711,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -9820,6 +9859,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -9964,6 +10006,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -10080,6 +10125,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
@@ -10199,6 +10247,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -10317,6 +10368,9 @@
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
 				},
+				"folder": {
+					"name": "ProjectEX"
+				},
 				"annotations": [],
 				"type": "AzureSqlTable",
 				"schema": [
@@ -10434,6 +10488,9 @@
 				"linkedServiceName": {
 					"referenceName": "AzureSqlDatabase1",
 					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "ProjectEX"
 				},
 				"annotations": [],
 				"type": "AzureSqlTable",
