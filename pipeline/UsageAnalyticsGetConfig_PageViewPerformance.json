@@ -1,0 +1,496 @@
+{
+	"name": "UsageAnalyticsGetConfig_PageViewPerformance",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set Staging Columns Mapping",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "StagingColumnsMapping",
+					"value": {
+						"value": "@activity('Get Configuration').output.firstRow.StagingColumnsMapping",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Landing Columns Mapping",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "LandingColumnsMapping",
+					"value": {
+						"value": "@activity('Get Configuration').output.firstRow.LandingColumnsMapping",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Include Null Environment",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "IncludeNullEnvironment",
+					"value": {
+						"value": "@bool(activity('Get Configuration').output.firstRow.IncludeNullEnvironment)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Default Environment",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "DefaultEnvironment",
+					"value": {
+						"value": "@string(activity('Get Configuration').output.firstRow.DefaultEnvironment)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set To Other Environment 1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ToOtherEnvironment1",
+					"value": {
+						"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment1)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set To Other Environment 2",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ToOtherEnvironment2",
+					"value": {
+						"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment2)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set To Other Environment 3",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ToOtherEnvironment3",
+					"value": {
+						"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment3)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Get Configuration",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderStoredProcedureName": "[UsageAnalyticsStaging].[uspGetConfiguration]",
+						"storedProcedureParameters": {
+							"ConfigurationGroup": {
+								"type": "String",
+								"value": {
+									"value": "@pipeline().parameters.AppInsightsTopic",
+									"type": "Expression"
+								}
+							},
+							"ConfigurationKey": {
+								"type": "String",
+								"value": null
+							}
+						},
+						"queryTimeout": "02:00:00"
+					},
+					"dataset": {
+						"referenceName": "UsageAnalyticsIngestConfig_DS",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "Set App Insights Directory",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "AppInsightsDirectory",
+					"value": {
+						"value": "@string(activity('Get Configuration').output.firstRow.AppInsightsDirectory)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set To Other Environment 4",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ToOtherEnvironment4",
+					"value": {
+						"value": "@string(activity('Get Configuration').output.firstRow.ToOtherEnvironment4)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Ingest Enabled",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "IngestEnabled",
+					"value": {
+						"value": "@bool(string(activity('Get Configuration').output.firstRow.IngestEnabled))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "If Ingest Enabled",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "Set Ingest Enabled",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set To Other Environment 4",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set App Insights Directory",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set To Other Environment 3",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set To Other Environment 2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set To Other Environment 1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Default Environment",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Include Null Environment",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Landing Columns Mapping",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Staging Columns Mapping",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Environment Column Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Container Name",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@variables('IngestEnabled')",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Ingest Telemetry",
+							"type": "ExecutePipeline",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"pipeline": {
+									"referenceName": "UsageAnalyticsIngest_PageViewPerformance",
+									"type": "PipelineReference"
+								},
+								"waitOnCompletion": false,
+								"parameters": {
+									"AppInsightsDirectory": {
+										"value": "@variables('AppInsightsDirectory')",
+										"type": "Expression"
+									},
+									"AppInsightsTopic": {
+										"value": "@pipeline().parameters.AppInsightsTopic",
+										"type": "Expression"
+									},
+									"TelemetryDateFolder": {
+										"value": "@pipeline().parameters.TelemetryDateFolder",
+										"type": "Expression"
+									},
+									"StagingColumnsMapping": {
+										"value": "@json(variables('StagingColumnsMapping'))",
+										"type": "Expression"
+									},
+									"LandingColumnsMapping": {
+										"value": "@json(variables('LandingColumnsMapping'))",
+										"type": "Expression"
+									},
+									"IncludeNullEnvironment": {
+										"value": "@variables('IncludeNullEnvironment')",
+										"type": "Expression"
+									},
+									"DefaultEnvironment": {
+										"value": "@variables('DefaultEnvironment')",
+										"type": "Expression"
+									},
+									"ToOtherEnvironment1": {
+										"value": "@variables('ToOtherEnvironment1')",
+										"type": "Expression"
+									},
+									"ToOtherEnvironment2": {
+										"value": "@variables('ToOtherEnvironment2')",
+										"type": "Expression"
+									},
+									"ToOtherEnvironment3": {
+										"value": "@variables('ToOtherEnvironment3')",
+										"type": "Expression"
+									},
+									"RunBy": {
+										"value": "@pipeline().parameters.RunBy",
+										"type": "Expression"
+									},
+									"ToOtherEnvironment4": {
+										"value": "@variables('ToOtherEnvironment4')",
+										"type": "Expression"
+									},
+									"ContextCustomDimensionsEnvironmentColumnName": {
+										"value": "@variables('ContextCustomDimensionsEnvironmentColumnName')",
+										"type": "Expression"
+									},
+									"ContainerName": {
+										"value": "@variables('ContainerName')",
+										"type": "Expression"
+									}
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Set Environment Column Name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ContextCustomDimensionsEnvironmentColumnName",
+					"value": {
+						"value": "@string(activity('Get Configuration').output.firstRow.ContextCustomDimensionsEnvironmentColumnName)",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set Container Name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Configuration",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ContainerName",
+					"value": {
+						"value": "@string(activity('Get Configuration').output.firstRow.ContainerName)",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"AppInsightsTopic": {
+				"type": "string",
+				"defaultValue": "PageViews"
+			},
+			"TelemetryDateFolder": {
+				"type": "string"
+			},
+			"RunBy": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"StagingColumnsMapping": {
+				"type": "String"
+			},
+			"LandingColumnsMapping": {
+				"type": "String"
+			},
+			"IncludeNullEnvironment": {
+				"type": "Boolean"
+			},
+			"DefaultEnvironment": {
+				"type": "String"
+			},
+			"ToOtherEnvironment1": {
+				"type": "String"
+			},
+			"ToOtherEnvironment2": {
+				"type": "String"
+			},
+			"ToOtherEnvironment3": {
+				"type": "String"
+			},
+			"ToOtherEnvironment4": {
+				"type": "String"
+			},
+			"AppInsightsDirectory": {
+				"type": "String"
+			},
+			"IngestEnabled": {
+				"type": "Boolean"
+			},
+			"ContextCustomDimensionsEnvironmentColumnName": {
+				"type": "String"
+			},
+			"ContainerName": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Portals"
+		},
+		"annotations": []
+	}
+}
