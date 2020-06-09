@@ -1,0 +1,63 @@
+{
+	"name": "UsageAnalyticsTelemetryMetricsTable_OtherEnv2_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXSQL_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ContextDataEventTime",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "InternalDataId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "ContextDataSyntheticSource",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDeviceType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextSessionIsFirst",
+				"type": "bit"
+			},
+			{
+				"name": "ContextCustomDimensionsPortalId",
+				"type": "varchar"
+			},
+			{
+				"name": "ContextCustomDimensionsPortalEnvironment",
+				"type": "varchar"
+			},
+			{
+				"name": "ContextCustomDimensionsAppSrv_SlotName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimensionsAppSrv_SiteName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TelemetryIngestBatchId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "TelemetryDate",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "UsageAnalytics",
+			"table": "Metrics"
+		}
+	}
+}
