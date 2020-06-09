@@ -3,7 +3,18 @@
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
-		"pipelines": [],
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "UsageAnalyticsIngest",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"TelemetryDateFolder": "PreviousDate",
+					"RunBy": "System"
+				}
+			}
+		],
 		"type": "ScheduleTrigger",
 		"typeProperties": {
 			"recurrence": {
