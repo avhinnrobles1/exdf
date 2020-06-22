@@ -1,0 +1,17 @@
+{
+	"name": "EXAI_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXAI_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "azurereadlogsstore"
+			}
+		}
+	}
+}
