@@ -1,0 +1,12 @@
+{
+	"name": "EXSQL_AAL_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXSQL_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
