@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_js8",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXSQL_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Time",
+				"type": "nvarchar",
+				"precision": 0,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "InsightsLogs",
+			"table": "AuditLogs"
+		}
+	}
+}
