@@ -67,6 +67,11 @@
 				]
 			}
 		],
+		"parameters": {
+			"Mapping": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
