@@ -1,0 +1,174 @@
+{
+	"name": "SourceDataset_js8",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXAI_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "PT1H.json",
+				"folderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42/y=2020/m=06/d=23/h=14/m=00",
+				"container": "insights-logs-auditlogs"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"time": {
+					"type": "string"
+				},
+				"resourceId": {
+					"type": "string"
+				},
+				"operationName": {
+					"type": "string"
+				},
+				"operationVersion": {
+					"type": "string"
+				},
+				"category": {
+					"type": "string"
+				},
+				"tenantId": {
+					"type": "string"
+				},
+				"resultSignature": {
+					"type": "string"
+				},
+				"resultDescription": {
+					"type": "string"
+				},
+				"durationMs": {
+					"type": "integer"
+				},
+				"callerIpAddress": {
+					"type": "string"
+				},
+				"correlationId": {
+					"type": "string"
+				},
+				"level": {
+					"type": "string"
+				},
+				"properties": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"category": {
+							"type": "string"
+						},
+						"correlationId": {
+							"type": "string"
+						},
+						"result": {
+							"type": "string"
+						},
+						"resultReason": {
+							"type": "string"
+						},
+						"activityDisplayName": {
+							"type": "string"
+						},
+						"activityDateTime": {
+							"type": "string"
+						},
+						"loggedByService": {
+							"type": "string"
+						},
+						"operationType": {
+							"type": "string"
+						},
+						"initiatedBy": {
+							"type": "object",
+							"properties": {
+								"user": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "null"
+										},
+										"displayName": {
+											"type": "string"
+										},
+										"userPrincipalName": {
+											"type": "string"
+										},
+										"ipAddress": {
+											"type": "string"
+										},
+										"roles": {
+											"type": "array"
+										}
+									}
+								},
+								"app": {
+									"type": "object",
+									"properties": {
+										"appId": {
+											"type": "string"
+										},
+										"displayName": {
+											"type": "null"
+										},
+										"servicePrincipalId": {
+											"type": "null"
+										},
+										"servicePrincipalName": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"targetResources": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "string"
+									},
+									"displayName": {
+										"type": "null"
+									},
+									"type": {
+										"type": "string"
+									},
+									"modifiedProperties": {
+										"type": "array"
+									},
+									"administrativeUnits": {
+										"type": "array"
+									}
+								}
+							}
+						},
+						"additionalDetails": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"key": {
+										"type": "string"
+									},
+									"value": {
+										"type": "string"
+									}
+								}
+							}
+						}
+					}
+				},
+				"identity": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
