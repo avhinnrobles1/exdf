@@ -18,6 +18,9 @@
 				"pipelineReference": {
 					"referenceName": "CopyPipeline_AuditToDatabase",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"sTARTdATE": "PreviousDate"
 				}
 			}
 		],
