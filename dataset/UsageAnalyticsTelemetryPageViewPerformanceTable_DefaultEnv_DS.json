@@ -135,5 +135,6 @@
 			"schema": "UsageAnalytics",
 			"table": "PageViewPerformance"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

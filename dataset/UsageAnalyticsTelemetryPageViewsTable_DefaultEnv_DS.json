@@ -108,5 +108,6 @@
 			"schema": "UsageAnalytics",
 			"table": "PageViews"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

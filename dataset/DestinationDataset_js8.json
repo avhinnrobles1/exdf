@@ -19,5 +19,6 @@
 			"schema": "InsightsLogs",
 			"table": "AuditLogs"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }

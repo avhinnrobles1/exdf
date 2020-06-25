@@ -67,11 +67,7 @@
 				]
 			}
 		],
-		"parameters": {
-			"Mapping": {
-				"type": "string"
-			}
-		},
 		"annotations": []
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

@@ -1988,5 +1988,6 @@
 			"name": "Portals"
 		},
 		"annotations": []
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }

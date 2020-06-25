@@ -111,5 +111,6 @@
 			"schema": "UsageAnalyticsStaging",
 			"table": "Event"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
 }
