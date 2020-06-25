@@ -33,7 +33,11 @@
 								"value": "@adddays(utcnow(),-1)",
 								"type": "Expression"
 							},
-							"wildcardFileName": "PT1H.json",
+							"wildcardFolderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
+							"wildcardFileName": {
+								"value": "*.json",
+								"type": "Expression"
+							},
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
