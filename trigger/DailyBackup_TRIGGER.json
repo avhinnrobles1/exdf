@@ -13,6 +13,12 @@
 					"TelemetryDateFolder": "PreviousDate",
 					"RunBy": "System"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "CopyPipeline_AuditToDatabase",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
@@ -20,7 +26,7 @@
 			"recurrence": {
 				"frequency": "Day",
 				"interval": 1,
-				"startTime": "2020-06-09T01:00:00Z",
+				"startTime": "2020-06-09T01:00:00.000Z",
 				"timeZone": "UTC"
 			}
 		}
