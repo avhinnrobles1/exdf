@@ -29,6 +29,10 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@adddays(utcnow(),-1)",
+								"type": "Expression"
+							},
 							"wildcardFileName": "PT1H.json",
 							"enablePartitionDiscovery": false
 						},
