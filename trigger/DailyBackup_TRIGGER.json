@@ -13,6 +13,12 @@
 					"TelemetryDateFolder": "PreviousDate",
 					"RunBy": "System"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "CopyPipeline_AuditToDatabase",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
