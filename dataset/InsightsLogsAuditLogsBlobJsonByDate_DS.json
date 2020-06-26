@@ -1,5 +1,5 @@
 {
-	"name": "SourceDataset_js8",
+	"name": "InsightsLogsAuditLogsBlobJsonByDate_DS",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "EXAI_LS",

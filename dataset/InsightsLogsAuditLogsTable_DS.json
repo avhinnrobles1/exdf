@@ -1,0 +1,155 @@
+{
+	"name": "InsightsLogsAuditLogsTable_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXSQL_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "resourceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "operationName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "operationVersion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "category",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tenantId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "resultSignature",
+				"type": "nvarchar"
+			},
+			{
+				"name": "resultDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "durationMs",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "callerIpAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "correlationId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "level",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropCategory",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropCorrelationId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropResult",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropResultReason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropActivityDisplayName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropActivityDateTime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropLoggedByService",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropOperationType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByUserId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByUserDisplayName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByUserPrincipalName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByUserIpAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByAppId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByAppDisplayName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByAppServicePrincipalId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByAppServicePrincipalName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByTargetResourceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByTargetResourceDisplayName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropInitiatedByTargetResourceType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Identity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PipelineRunId",
+				"type": "uniqueidentifier"
+			}
+		],
+		"typeProperties": {
+			"schema": "InsightsLogs",
+			"table": "AuditLogs"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

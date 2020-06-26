@@ -5,7 +5,14 @@
 			{
 				"name": "ETL Audit Logs",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Default Value If DateToLoad is Empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
@@ -353,6 +360,14 @@
 									"name": "Identity",
 									"type": "String"
 								}
+							},
+							{
+								"source": {
+									"path": "$['PipelineRunId']"
+								},
+								"sink": {
+									"name": "PipelineRunId"
+								}
 							}
 						],
 						"collectionReference": "",
@@ -361,13 +376,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_js8",
+						"referenceName": "InsightsLogsAuditLogsBlobJsonByDate_DS",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_js8",
+						"referenceName": "InsightsLogsAuditLogsTable_DS",
 						"type": "DatasetReference"
 					}
 				]
