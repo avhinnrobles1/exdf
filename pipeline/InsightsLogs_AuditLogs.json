@@ -368,13 +368,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_js8",
+						"referenceName": "InsightsLogsAuditLogsBlobJsonByDate_DS",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_js8",
+						"referenceName": "InsightsLogsAuditLogsTable_DS",
 						"type": "DatasetReference"
 					}
 				]

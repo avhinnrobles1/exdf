@@ -1,5 +1,5 @@
 {
-	"name": "DestinationDataset_js8",
+	"name": "InsightsLogsAuditLogsTable_DS",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "EXSQL_LS",
