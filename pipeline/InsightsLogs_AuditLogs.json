@@ -36,7 +36,10 @@
 						"additionalColumns": [
 							{
 								"name": "PipelineRunId",
-								"value": "7d06eda0-52ca-478b-97bd-5a6ffc331ae4"
+								"value": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								}
 							}
 						],
 						"storeSettings": {
