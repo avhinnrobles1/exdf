@@ -365,6 +365,18 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Default Value If DateToLoad is Empty",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
