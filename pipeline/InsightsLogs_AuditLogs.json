@@ -368,8 +368,14 @@
 			}
 		],
 		"parameters": {
-			"sTARTdATE": {
-				"type": "string"
+			"DateToLoad": {
+				"type": "string",
+				"defaultValue": "PreviousDate"
+			}
+		},
+		"variables": {
+			"DateToLoad": {
+				"type": "String"
 			}
 		},
 		"annotations": []
