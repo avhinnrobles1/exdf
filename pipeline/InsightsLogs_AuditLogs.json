@@ -360,6 +360,14 @@
 									"name": "Identity",
 									"type": "String"
 								}
+							},
+							{
+								"source": {
+									"path": "$['PipelineRunId']"
+								},
+								"sink": {
+									"name": "PipelineRunId"
+								}
 							}
 						],
 						"collectionReference": "",
