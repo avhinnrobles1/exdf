@@ -1,5 +1,5 @@
 {
-	"name": "CopyPipeline_AuditToDatabase",
+	"name": "InsightsLogs_AuditLogs",
 	"properties": {
 		"activities": [
 			{
