@@ -375,7 +375,22 @@
 					"expression": {
 						"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
 						"type": "Expression"
-					}
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Set DateToLoad to Default",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
+									"type": "Expression"
+								}
+							}
+						}
+					]
 				}
 			}
 		],
