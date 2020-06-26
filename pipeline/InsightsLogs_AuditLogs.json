@@ -1,9 +1,9 @@
 {
-	"name": "CopyPipeline_AuditToDatabase",
+	"name": "InsightsLogs_AuditLogs",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_js8",
+				"name": "ETL Audit Logs",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "insights-logs-auditlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42/y=2020/m=06/d=23/h=14/m=00/PT1H.json"
+						"value": "insights-logs-auditlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42"
 					},
 					{
 						"name": "Destination",
@@ -26,6 +26,15 @@
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "PipelineRunId",
+								"value": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
@@ -365,11 +374,59 @@
 						"type": "DatasetReference"
 					}
 				]
+			},
+			{
+				"name": "Default Value If DateToLoad is Empty",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set DateToLoad to Parameter Value",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@pipeline().parameters.DateToLoad",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set DateToLoad to Default",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
 			}
 		],
 		"parameters": {
-			"sTARTdATE": {
-				"type": "string"
+			"DateToLoad": {
+				"type": "string",
+				"defaultValue": "PreviousDate"
+			}
+		},
+		"variables": {
+			"DateToLoad": {
+				"type": "String"
 			}
 		},
 		"annotations": []
