@@ -376,6 +376,21 @@
 						"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "Set DateToLoad to Parameter Value",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@pipeline().parameters.DateToLoad",
+									"type": "Expression"
+								}
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "Set DateToLoad to Default",
