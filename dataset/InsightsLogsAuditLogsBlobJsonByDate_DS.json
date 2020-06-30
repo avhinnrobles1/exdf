@@ -5,6 +5,12 @@
 			"referenceName": "EXAI_LS",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"LogDate": {
+				"type": "string",
+				"defaultValue": "YYYY-MM-DD"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
