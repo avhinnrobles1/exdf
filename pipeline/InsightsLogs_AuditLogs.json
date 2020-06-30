@@ -46,7 +46,7 @@
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
 							"modifiedDatetimeStart": {
-								"value": "@adddays(utcnow(),-1)",
+								"value": "@variables('DateToLoad')",
 								"type": "Expression"
 							},
 							"wildcardFolderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
