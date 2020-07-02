@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ETL Audit Logs",
+				"name": "ETL SignIn Logs",
 				"type": "Copy",
 				"dependsOn": [
 					{
