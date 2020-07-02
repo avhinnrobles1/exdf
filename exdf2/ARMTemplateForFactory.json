@@ -5620,14 +5620,6 @@
 									},
 									{
 										"source": {
-											"path": "$['context']['custom']['dimensions'][0]['SpanId']"
-										},
-										"sink": {
-											"name": "ContextCustomDimSpanId"
-										}
-									},
-									{
-										"source": {
 											"path": "$['context']['custom']['dimensions'][0]['ActionName']"
 										},
 										"sink": {
