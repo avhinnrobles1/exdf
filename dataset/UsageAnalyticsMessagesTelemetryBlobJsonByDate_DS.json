@@ -16,6 +16,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "*.blob",
 				"folderPath": {
 					"value": "@concat('exai_c332c05611a745beb25e7c088db74cfa/Messages/', dataset().DateToLoad)",
 					"type": "Expression"
@@ -26,102 +27,99 @@
 		"schema": {
 			"type": "object",
 			"properties": {
-				"time": {
-					"type": "string"
+				"message": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"raw": {
+								"type": "string"
+							},
+							"severityLevel": {
+								"type": "string"
+							}
+						}
+					}
 				},
-				"resourceId": {
-					"type": "string"
-				},
-				"operationName": {
-					"type": "string"
-				},
-				"operationVersion": {
-					"type": "string"
-				},
-				"category": {
-					"type": "string"
-				},
-				"tenantId": {
-					"type": "string"
-				},
-				"resultType": {
-					"type": "string"
-				},
-				"resultSignature": {
-					"type": "string"
-				},
-				"resultDescription": {
-					"type": "string"
-				},
-				"durationMs": {
-					"type": "integer"
-				},
-				"callerIpAddress": {
-					"type": "string"
-				},
-				"correlationId": {
-					"type": "string"
-				},
-				"identity": {
-					"type": "string"
-				},
-				"Level": {
-					"type": "integer"
-				},
-				"properties": {
+				"internal": {
 					"type": "object",
 					"properties": {
-						"id": {
-							"type": "string"
-						},
-						"createdDateTime": {
-							"type": "string"
-						},
-						"userDisplayName": {
-							"type": "string"
-						},
-						"userPrincipalName": {
-							"type": "string"
-						},
-						"userId": {
-							"type": "string"
-						},
-						"appId": {
-							"type": "string"
-						},
-						"appDisplayName": {
-							"type": "string"
-						},
-						"ipAddress": {
-							"type": "string"
-						},
-						"status": {
+						"data": {
 							"type": "object",
 							"properties": {
-								"errorCode": {
-									"type": "integer"
-								},
-								"failureReason": {
+								"id": {
 									"type": "string"
 								},
-								"additionalDetails": {
+								"documentVersion": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"context": {
+					"type": "object",
+					"properties": {
+						"application": {
+							"type": "object",
+							"properties": {
+								"version": {
 									"type": "string"
 								}
 							}
 						},
-						"userAgent": {
-							"type": "string"
-						},
-						"deviceDetail": {
+						"data": {
 							"type": "object",
 							"properties": {
-								"deviceId": {
+								"eventTime": {
 									"type": "string"
 								},
-								"operatingSystem": {
+								"isSynthetic": {
+									"type": "boolean"
+								},
+								"samplingRate": {
+									"type": "number"
+								}
+							}
+						},
+						"cloud": {
+							"type": "object"
+						},
+						"device": {
+							"type": "object",
+							"properties": {
+								"type": {
 									"type": "string"
 								},
-								"browser": {
+								"roleName": {
+									"type": "string"
+								},
+								"roleInstance": {
+									"type": "string"
+								},
+								"screenResolution": {
+									"type": "object"
+								}
+							}
+						},
+						"session": {
+							"type": "object",
+							"properties": {
+								"isFirst": {
+									"type": "boolean"
+								}
+							}
+						},
+						"operation": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"parentId": {
+									"type": "string"
+								},
+								"name": {
 									"type": "string"
 								}
 							}
@@ -129,118 +127,34 @@
 						"location": {
 							"type": "object",
 							"properties": {
-								"geoCoordinates": {
-									"type": "object",
-									"properties": {
-										"latitude": {
-											"type": "number"
-										},
-										"longitude": {
-											"type": "number"
-										}
-									}
-								},
-								"city": {
+								"clientip": {
 									"type": "string"
 								},
-								"state": {
+								"continent": {
 									"type": "string"
 								},
-								"countryOrRegion": {
+								"country": {
 									"type": "string"
 								}
 							}
 						},
-						"mfaDetail": {
+						"custom": {
 							"type": "object",
 							"properties": {
-								"authMethod": {
-									"type": "string"
-								},
-								"authDetail": {
-									"type": "string"
+								"dimensions": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"TraceId": {
+												"type": "string"
+											}
+										}
+									}
 								}
 							}
-						},
-						"correlationId": {
-							"type": "string"
-						},
-						"conditionalAccessStatus": {
-							"type": "string"
-						},
-						"appliedConditionalAccessPolicies": {
-							"type": "array"
-						},
-						"originalRequestId": {
-							"type": "string"
-						},
-						"isInteractive": {
-							"type": "boolean"
-						},
-						"tokenIssuerName": {
-							"type": "string"
-						},
-						"tokenIssuerType": {
-							"type": "string"
-						},
-						"authenticationProcessingDetails": {
-							"type": "array"
-						},
-						"networkLocationDetails": {
-							"type": "array"
-						},
-						"processingTimeInMilliseconds": {
-							"type": "integer"
-						},
-						"riskDetail": {
-							"type": "string"
-						},
-						"riskLevelAggregated": {
-							"type": "string"
-						},
-						"riskLevelDuringSignIn": {
-							"type": "string"
-						},
-						"riskState": {
-							"type": "string"
-						},
-						"riskEventTypes": {
-							"type": "array"
-						},
-						"riskEventTypes_v2": {
-							"type": "array"
-						},
-						"resourceDisplayName": {
-							"type": "string"
-						},
-						"authenticationDetails": {
-							"type": "array"
-						},
-						"authenticationRequirementPolicies": {
-							"type": "array"
-						},
-						"authenticationRequirement": {
-							"type": "string"
-						},
-						"servicePrincipalId": {
-							"type": "string"
-						},
-						"accountType": {
-							"type": "integer"
-						},
-						"clientAppUsed": {
-							"type": "string"
-						},
-						"resourceId": {
-							"type": "string"
-						},
-						"alternateSignInName": {
-							"type": "string"
 						}
 					}
-				},
-				"location": {
-					"type": "string"
 				}
 			}
 		}
