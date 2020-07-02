@@ -23,11 +23,11 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "insights-logs-auditlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42"
+						"value": "insights-logs-signinlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42"
 					},
 					{
 						"name": "Destination",
-						"value": "InsightsLogs.AuditLogs"
+						"value": "InsightsLogs.SignInLogs"
 					}
 				],
 				"typeProperties": {
@@ -47,11 +47,6 @@
 							"recursive": true,
 							"modifiedDatetimeStart": {
 								"value": "@variables('DateToLoad')",
-								"type": "Expression"
-							},
-							"wildcardFolderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
-							"wildcardFileName": {
-								"value": "*.json",
 								"type": "Expression"
 							},
 							"enablePartitionDiscovery": false
