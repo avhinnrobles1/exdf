@@ -508,14 +508,6 @@
 							},
 							{
 								"source": {
-									"path": "$['properties']['alternateSignInName']"
-								},
-								"sink": {
-									"name": "PropAlternateSignInName"
-								}
-							},
-							{
-								"source": {
 									"path": "$['PipelineRunId']"
 								},
 								"sink": {
