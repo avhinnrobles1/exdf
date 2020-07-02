@@ -9,219 +9,135 @@
 		"type": "AzureSqlTable",
 		"schema": [
 			{
-				"name": "time",
+				"name": "MessageRaw",
 				"type": "nvarchar"
 			},
 			{
-				"name": "resourceId",
+				"name": "MessageSeverityLevel",
 				"type": "nvarchar"
 			},
 			{
-				"name": "operationName",
+				"name": "InternalDataId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "InternalDataDocVer",
 				"type": "nvarchar"
 			},
 			{
-				"name": "operationVersion",
+				"name": "ContextAppVersion",
 				"type": "nvarchar"
 			},
 			{
-				"name": "category",
+				"name": "ContextDataEventTime",
 				"type": "nvarchar"
 			},
 			{
-				"name": "tenantId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "resultType",
-				"type": "nvarchar"
-			},
-			{
-				"name": "resultSignature",
-				"type": "nvarchar"
-			},
-			{
-				"name": "resultDescription",
-				"type": "nvarchar"
-			},
-			{
-				"name": "durationMs",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "callerIpAddress",
-				"type": "nvarchar"
-			},
-			{
-				"name": "correlationId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "identity",
-				"type": "nvarchar"
-			},
-			{
-				"name": "Level",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropCreatedDateTime",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropUserDisplayName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropUserPrincipalName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropUserId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropAppId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropAppDisplayName",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropIpAddress",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropStatusErrorCode",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "PropStatusFailureReason",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropUserAgent",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropDeviceDetailId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropDeviceDetailOS",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropDeviceDetailBrowser",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropLocGeoCoorLat",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropLocGeoCoorLong",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropLocCity",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropLocState",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropLocCountryOrRegion",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropMfaDetailAuthMethod",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropMfaDetailAuthDetail",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropConditionalAccessStatus",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropOriginalRequestId",
-				"type": "nvarchar"
-			},
-			{
-				"name": "PropIsInteractive",
+				"name": "ContextDataIsSynthetic",
 				"type": "bit"
 			},
 			{
-				"name": "PropTokenIssuerName",
+				"name": "ContextDataSamplingRate",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropTokenIssuerType",
+				"name": "ContextDataDeviceType",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropProcessingTimeInMilliseconds",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "PropRiskDetail",
+				"name": "ContextDataDeviceRoleName",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropRiskLevelAggregated",
+				"name": "ContextDataDeviceRoleInstance",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropRiskLevelDuringSignIn",
+				"name": "ContextDataSessionIsFirst",
+				"type": "bit"
+			},
+			{
+				"name": "ContextDataOperationId",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropRiskState",
+				"name": "ContextDataOperationParentId",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropResourceDisplayName",
+				"name": "ContextDataOperationName",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropAuthenticationRequirement",
+				"name": "ContextLocationClientIp",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropServicePrincipalId",
+				"name": "ContextLocationContinent",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropAccountType",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "PropClientAppUsed",
+				"name": "ContextLocationCountry",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropResourceId",
+				"name": "ContextCustomDimTraceId",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropAlternateSignInName",
+				"name": "ContextCustomDimCategoryName",
 				"type": "nvarchar"
 			},
 			{
-				"name": "PropLocation",
+				"name": "ContextCustomDimRequestId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimActionId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "ContextCustomDimOriginalFormat",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimParentId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimRequestPath",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimAspNetCoreEnvironment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimEventId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimMethod",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimScheme",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimPath",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimProtocol",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimHost",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimQueryString",
 				"type": "nvarchar"
 			},
 			{
