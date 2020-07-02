@@ -28,6 +28,12 @@
 					"referenceName": "InsightsLogs_SignInLogs",
 					"type": "PipelineReference"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "UsageAnalyticsIngest_Messages",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",

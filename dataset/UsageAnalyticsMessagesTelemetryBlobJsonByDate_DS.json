@@ -1,0 +1,162 @@
+{
+	"name": "UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXAI_LS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DateToLoad": {
+				"type": "string",
+				"defaultValue": "PreviousDate"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "*.blob",
+				"folderPath": {
+					"value": "@concat('exai_c332c05611a745beb25e7c088db74cfa/Messages/', dataset().DateToLoad)",
+					"type": "Expression"
+				},
+				"container": "exsav2-ai-container"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"message": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"raw": {
+								"type": "string"
+							},
+							"severityLevel": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"internal": {
+					"type": "object",
+					"properties": {
+						"data": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"documentVersion": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"context": {
+					"type": "object",
+					"properties": {
+						"application": {
+							"type": "object",
+							"properties": {
+								"version": {
+									"type": "string"
+								}
+							}
+						},
+						"data": {
+							"type": "object",
+							"properties": {
+								"eventTime": {
+									"type": "string"
+								},
+								"isSynthetic": {
+									"type": "boolean"
+								},
+								"samplingRate": {
+									"type": "number"
+								}
+							}
+						},
+						"cloud": {
+							"type": "object"
+						},
+						"device": {
+							"type": "object",
+							"properties": {
+								"type": {
+									"type": "string"
+								},
+								"roleName": {
+									"type": "string"
+								},
+								"roleInstance": {
+									"type": "string"
+								},
+								"screenResolution": {
+									"type": "object"
+								}
+							}
+						},
+						"session": {
+							"type": "object",
+							"properties": {
+								"isFirst": {
+									"type": "boolean"
+								}
+							}
+						},
+						"operation": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "string"
+								},
+								"parentId": {
+									"type": "string"
+								},
+								"name": {
+									"type": "string"
+								}
+							}
+						},
+						"location": {
+							"type": "object",
+							"properties": {
+								"clientip": {
+									"type": "string"
+								},
+								"continent": {
+									"type": "string"
+								},
+								"country": {
+									"type": "string"
+								}
+							}
+						},
+						"custom": {
+							"type": "object",
+							"properties": {
+								"dimensions": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"TraceId": {
+												"type": "string"
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
