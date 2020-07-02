@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "PT1H.json",
-				"folderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42/y=2020/m=06/d=23/h=13/m=00",
+				"folderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
 				"container": "insights-logs-signinlogs"
 			}
 		}
