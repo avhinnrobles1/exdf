@@ -1,0 +1,450 @@
+{
+	"name": "InsightsLogs_SignInLogs",
+	"properties": {
+		"activities": [
+			{
+				"name": "ETL Audit Logs",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Default Value If DateToLoad is Empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "insights-logs-auditlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42"
+					},
+					{
+						"name": "Destination",
+						"value": "InsightsLogs.AuditLogs"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "PipelineRunId",
+								"value": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@variables('DateToLoad')",
+								"type": "Expression"
+							},
+							"wildcardFolderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
+							"wildcardFileName": {
+								"value": "*.json",
+								"type": "Expression"
+							},
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['time']"
+								},
+								"sink": {
+									"name": "time",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['resourceId']"
+								},
+								"sink": {
+									"name": "resourceId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['operationName']"
+								},
+								"sink": {
+									"name": "operationName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['operationVersion']"
+								},
+								"sink": {
+									"name": "operationVersion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['category']"
+								},
+								"sink": {
+									"name": "category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['tenantId']"
+								},
+								"sink": {
+									"name": "tenantId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['resultSignature']"
+								},
+								"sink": {
+									"name": "resultSignature",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['resultDescription']"
+								},
+								"sink": {
+									"name": "resultDescription",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['durationMs']"
+								},
+								"sink": {
+									"name": "durationMs",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['callerIpAddress']"
+								},
+								"sink": {
+									"name": "callerIpAddress",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['correlationId']"
+								},
+								"sink": {
+									"name": "correlationId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['level']"
+								},
+								"sink": {
+									"name": "level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['id']"
+								},
+								"sink": {
+									"name": "PropId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['category']"
+								},
+								"sink": {
+									"name": "PropCategory",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['correlationId']"
+								},
+								"sink": {
+									"name": "PropCorrelationId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['result']"
+								},
+								"sink": {
+									"name": "PropResult",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['resultReason']"
+								},
+								"sink": {
+									"name": "PropResultReason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['activityDisplayName']"
+								},
+								"sink": {
+									"name": "PropActivityDisplayName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['activityDateTime']"
+								},
+								"sink": {
+									"name": "PropActivityDateTime",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['loggedByService']"
+								},
+								"sink": {
+									"name": "PropLoggedByService",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['operationType']"
+								},
+								"sink": {
+									"name": "PropOperationType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['initiatedBy']['user']['id']"
+								},
+								"sink": {
+									"name": "PropInitiatedByUserId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['initiatedBy']['user']['displayName']"
+								},
+								"sink": {
+									"name": "PropInitiatedByUserDisplayName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['initiatedBy']['user']['userPrincipalName']"
+								},
+								"sink": {
+									"name": "PropInitiatedByUserPrincipalName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['initiatedBy']['user']['ipAddress']"
+								},
+								"sink": {
+									"name": "PropInitiatedByUserIpAddress",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['initiatedBy']['app']['appId']"
+								},
+								"sink": {
+									"name": "PropInitiatedByAppId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['initiatedBy']['app']['displayName']"
+								},
+								"sink": {
+									"name": "PropInitiatedByAppDisplayName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['initiatedBy']['app']['servicePrincipalId']"
+								},
+								"sink": {
+									"name": "PropInitiatedByAppServicePrincipalId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['initiatedBy']['app']['servicePrincipalName']"
+								},
+								"sink": {
+									"name": "PropInitiatedByAppServicePrincipalName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['targetResources'][0]['id']"
+								},
+								"sink": {
+									"name": "PropInitiatedByTargetResourceId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['targetResources'][0]['displayName']"
+								},
+								"sink": {
+									"name": "PropInitiatedByTargetResourceDisplayName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['targetResources'][0]['type']"
+								},
+								"sink": {
+									"name": "PropInitiatedByTargetResourceType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['identity']"
+								},
+								"sink": {
+									"name": "Identity",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['PipelineRunId']"
+								},
+								"sink": {
+									"name": "PipelineRunId"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": false
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "InsightsLogsAuditLogsBlobJsonByDate_DS",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "InsightsLogsAuditLogsTable_DS",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Default Value If DateToLoad is Empty",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set DateToLoad to Parameter Value",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@pipeline().parameters.DateToLoad",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set DateToLoad to Default",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"DateToLoad": {
+				"type": "string",
+				"defaultValue": "PreviousDate"
+			}
+		},
+		"variables": {
+			"DateToLoad": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
