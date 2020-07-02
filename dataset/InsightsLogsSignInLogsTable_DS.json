@@ -58,6 +58,10 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "identity",
+				"type": "nvarchar"
+			},
+			{
 				"name": "Level",
 				"type": "nvarchar"
 			},
@@ -119,7 +123,31 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "PropLocGeoCoorLat",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropLocGeoCoorLong",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropLocCity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropLocState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropLocCountryOrRegion",
+				"type": "nvarchar"
+			},
+			{
 				"name": "PropMfaDetailAuthMethod",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropMfaDetailAuthDetail",
 				"type": "nvarchar"
 			},
 			{
@@ -181,6 +209,22 @@
 				"precision": 10
 			},
 			{
+				"name": "PropClientAppUsed",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropResourceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropAlternateSignInName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropLocation",
+				"type": "nvarchar"
+			},
+			{
 				"name": "PipelineRunId",
 				"type": "nvarchar"
 			}
@@ -189,6 +233,5 @@
 			"schema": "InsightsLogs",
 			"table": "SignInLogs"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }
