@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"folderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
-				"container": " insights-logs-signinlogs"
+				"container": "insights-logs-signinlogs"
 			}
 		}
 	},
