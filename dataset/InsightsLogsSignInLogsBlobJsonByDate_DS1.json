@@ -1,0 +1,19 @@
+{
+	"name": "InsightsLogsSignInLogsBlobJsonByDate_DS1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXAI_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "PT1H.json",
+				"folderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
+				"container": "insights-logs-signinlogs"
+			}
+		}
+	}
+}

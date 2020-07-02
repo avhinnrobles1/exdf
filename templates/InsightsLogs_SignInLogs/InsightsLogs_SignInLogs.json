@@ -1,0 +1,386 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name"
+		},
+		"EXAI_LS": {
+			"type": "string"
+		},
+		"EXSQL_LS": {
+			"type": "string"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/InsightsLogs_SignInLogs')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ETL SignIn Logs",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Default Value If DateToLoad is Empty",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "insights-logs-signinlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42/*.json"
+							},
+							{
+								"name": "Destination",
+								"value": "InsightsLogs.SignInLogs"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"additionalColumns": [
+									{
+										"name": "PipelineRunId",
+										"value": {
+											"value": "@pipeline().RunId",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"modifiedDatetimeStart": {
+										"value": "@variables('DateToLoad')",
+										"type": "Expression"
+									},
+									"wildcardFolderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
+									"wildcardFileName": {
+										"value": "*.json",
+										"type": "Expression"
+									},
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mapComplexValuesToString": false
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "InsightsLogsSignInLogsBlobJsonByDate_DS",
+								"type": "DatasetReference"
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "InsightsLogsSignInLogsTable_DS",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Default Value If DateToLoad is Empty",
+						"type": "IfCondition",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "Set DateToLoad to Parameter Value",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "DateToLoad",
+										"value": {
+											"value": "@pipeline().parameters.DateToLoad",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "Set DateToLoad to Default",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "DateToLoad",
+										"value": {
+											"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"parameters": {
+					"DateToLoad": {
+						"type": "string",
+						"defaultValue": "PreviousDate"
+					}
+				},
+				"variables": {
+					"DateToLoad": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/InsightsLogsSignInLogsBlobJsonByDate_DS')]",
+				"[concat(variables('factoryId'), '/datasets/InsightsLogsSignInLogsTable_DS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/InsightsLogsSignInLogsBlobJsonByDate_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('EXAI_LS')]",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "*.json",
+						"folderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
+						"container": "insights-logs-signinlogs"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/InsightsLogsSignInLogsTable_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "[parameters('EXSQL_LS')]",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "time",
+						"type": "nvarchar"
+					},
+					{
+						"name": "resourceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "operationName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "operationVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "category",
+						"type": "nvarchar"
+					},
+					{
+						"name": "tenantId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "resultType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "resultSignature",
+						"type": "nvarchar"
+					},
+					{
+						"name": "resultDescription",
+						"type": "nvarchar"
+					},
+					{
+						"name": "durationMs",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "callerIpAddress",
+						"type": "nvarchar"
+					},
+					{
+						"name": "correlationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Level",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropCreatedDateTime",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropUserDisplayName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropUserPrincipalName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropUserId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropAppId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropAppDisplayName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropIpAddress",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropStatusErrorCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PropStatusFailureReason",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropUserAgent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropDeviceDetailId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropDeviceDetailOS",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropDeviceDetailBrowser",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropMfaDetailAuthMethod",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropConditionalAccessStatus",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropOriginalRequestId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropIsInteractive",
+						"type": "bit"
+					},
+					{
+						"name": "PropTokenIssuerName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropTokenIssuerType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropProcessingTimeInMilliseconds",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PropRiskDetail",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropRiskLevelAggregated",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropRiskLevelDuringSignIn",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropRiskState",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropResourceDisplayName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropAuthenticationRequirement",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropServicePrincipalId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PropAccountType",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PipelineRunId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "InsightsLogs",
+					"table": "SignInLogs"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

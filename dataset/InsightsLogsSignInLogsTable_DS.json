@@ -1,0 +1,194 @@
+{
+	"name": "InsightsLogsSignInLogsTable_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXSQL_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "time",
+				"type": "nvarchar"
+			},
+			{
+				"name": "resourceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "operationName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "operationVersion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "category",
+				"type": "nvarchar"
+			},
+			{
+				"name": "tenantId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "resultType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "resultSignature",
+				"type": "nvarchar"
+			},
+			{
+				"name": "resultDescription",
+				"type": "nvarchar"
+			},
+			{
+				"name": "durationMs",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "callerIpAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "correlationId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Level",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropCreatedDateTime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropUserDisplayName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropUserPrincipalName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropUserId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropAppId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropAppDisplayName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropIpAddress",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropStatusErrorCode",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PropStatusFailureReason",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropUserAgent",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropDeviceDetailId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropDeviceDetailOS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropDeviceDetailBrowser",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropMfaDetailAuthMethod",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropConditionalAccessStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropOriginalRequestId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropIsInteractive",
+				"type": "bit"
+			},
+			{
+				"name": "PropTokenIssuerName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropTokenIssuerType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropProcessingTimeInMilliseconds",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PropRiskDetail",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropRiskLevelAggregated",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropRiskLevelDuringSignIn",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropRiskState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropResourceDisplayName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropAuthenticationRequirement",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropServicePrincipalId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PropAccountType",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PipelineRunId",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "InsightsLogs",
+			"table": "SignInLogs"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
