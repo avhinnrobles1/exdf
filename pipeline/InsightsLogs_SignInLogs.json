@@ -366,14 +366,6 @@
 							},
 							{
 								"source": {
-									"path": "$['properties']['mfaDetail']['authDetail']"
-								},
-								"sink": {
-									"name": "PropMfaDetailAuthDetail"
-								}
-							},
-							{
-								"source": {
 									"path": "$['properties']['conditionalAccessStatus']"
 								},
 								"sink": {
