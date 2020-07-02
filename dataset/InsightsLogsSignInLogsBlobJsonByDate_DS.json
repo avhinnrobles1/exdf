@@ -1,5 +1,5 @@
 {
-	"name": "InsightsLogsSignInLogsBlobJsonByDate_DS1",
+	"name": "InsightsLogsSignInLogsBlobJsonByDate_DS",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "EXAI_LS",
