@@ -49,8 +49,8 @@
 								"value": "@variables('DateToLoad')",
 								"type": "Expression"
 							},
-							"wildcardFolderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
-							"wildcardFileName": "*.json",
+							"wildcardFolderPath": "exai_c332c05611a745beb25e7c088db74cfa/Messages/",
+							"wildcardFileName": "*.blob",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -517,7 +517,10 @@
 						"referenceName": "UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS",
 						"type": "DatasetReference",
 						"parameters": {
-							"DateToLoad": "PreviousDate"
+							"DateToLoad": {
+								"value": "@variables('DateToLoad')",
+								"type": "Expression"
+							}
 						}
 					}
 				],
