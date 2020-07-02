@@ -23,7 +23,7 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "insights-logs-signinlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42"
+						"value": "insights-logs-signinlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42/*.json"
 					},
 					{
 						"name": "Destination",
