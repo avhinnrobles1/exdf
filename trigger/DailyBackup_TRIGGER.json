@@ -22,6 +22,12 @@
 				"parameters": {
 					"DateToLoad": "PreviousDate"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "InsightsLogs_SignInLogs",
+					"type": "PipelineReference"
+				}
 			}
 		],
 		"type": "ScheduleTrigger",
