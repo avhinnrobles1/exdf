@@ -5485,14 +5485,6 @@
 									},
 									{
 										"source": {
-											"path": "$['context']['custom']['dimensions'][0]['EventName']"
-										},
-										"sink": {
-											"name": "ContextCustomDimEventName"
-										}
-									},
-									{
-										"source": {
 											"path": "$['context']['custom']['dimensions'][0]['TraceId']"
 										},
 										"sink": {
@@ -5574,7 +5566,7 @@
 									},
 									{
 										"source": {
-											"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimMethod']"
+											"path": "$['context']['custom']['dimensions'][0]['Method']"
 										},
 										"sink": {
 											"name": "ContextCustomDimMethod",
@@ -5601,7 +5593,7 @@
 									},
 									{
 										"source": {
-											"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimProtocol']"
+											"path": "$['context']['custom']['dimensions'][0]['Protocol']"
 										},
 										"sink": {
 											"name": "ContextCustomDimProtocol",
@@ -5610,7 +5602,7 @@
 									},
 									{
 										"source": {
-											"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimHost']"
+											"path": "$['context']['custom']['dimensions'][0]['Host']"
 										},
 										"sink": {
 											"name": "ContextCustomDimHost",
