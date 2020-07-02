@@ -514,13 +514,10 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS1",
+						"referenceName": "UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS",
 						"type": "DatasetReference",
 						"parameters": {
-							"DateToLoad": {
-								"value": "@variables('DateToLoad')",
-								"type": "Expression"
-							}
+							"DateToLoad": "PreviousDate"
 						}
 					}
 				],
