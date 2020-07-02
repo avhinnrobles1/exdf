@@ -317,22 +317,6 @@
 							},
 							{
 								"source": {
-									"path": "$['properties']['location']['geoCoordinates']['latitude']"
-								},
-								"sink": {
-									"name": "PropLocGeoCoorLat"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['location']['geoCoordinates']['longitude']"
-								},
-								"sink": {
-									"name": "PropLocGeoCoorLong"
-								}
-							},
-							{
-								"source": {
 									"path": "$['properties']['location']['city']"
 								},
 								"sink": {
