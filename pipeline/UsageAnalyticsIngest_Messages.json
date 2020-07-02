@@ -49,7 +49,10 @@
 								"value": "@variables('DateToLoad')",
 								"type": "Expression"
 							},
-							"wildcardFolderPath": "exai_c332c05611a745beb25e7c088db74cfa/Messages",
+							"wildcardFolderPath": {
+								"value": "@concat('exai_c332c05611a745beb25e7c088db74cfa/Messages/', variables('DateToLoad'))",
+								"type": "Expression"
+							},
 							"wildcardFileName": "*.blob",
 							"enablePartitionDiscovery": false
 						},
