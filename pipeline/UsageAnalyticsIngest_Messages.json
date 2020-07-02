@@ -514,8 +514,14 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "InsightsLogsSignInLogsBlobJsonByDate_DS",
-						"type": "DatasetReference"
+						"referenceName": "UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS",
+						"type": "DatasetReference",
+						"parameters": {
+							"DateToLoad": {
+								"value": "@variables('DateToLoad')",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [

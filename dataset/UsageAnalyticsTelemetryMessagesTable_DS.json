@@ -1,0 +1,153 @@
+{
+	"name": "UsageAnalyticsTelemetryMessagesTable_DS",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXSQL_LS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "MessageRaw",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MessageSeverityLevel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "InternalDataId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "InternalDataDocVer",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextAppVersion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDataEventTime",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDataIsSynthetic",
+				"type": "bit"
+			},
+			{
+				"name": "ContextDataSamplingRate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDataDeviceType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDataDeviceRoleName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDataDeviceRoleInstance",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDataSessionIsFirst",
+				"type": "bit"
+			},
+			{
+				"name": "ContextDataOperationId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDataOperationParentId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextDataOperationName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextLocationClientIp",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextLocationContinent",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextLocationCountry",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimTraceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimCategoryName",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimRequestId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimActionId",
+				"type": "uniqueidentifier"
+			},
+			{
+				"name": "ContextCustomDimOriginalFormat",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimParentId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimRequestPath",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimAspNetCoreEnvironment",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimEventId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimMethod",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimScheme",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimPath",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimProtocol",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimHost",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ContextCustomDimQueryString",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PipelineRunId",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "UsageAnalytics",
+			"table": "Messages"
+		}
+	}
+}
