@@ -23,7 +23,7 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "exsav2-ai-container/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42/*.json"
+						"value": "exsav2-ai-container/exai_c332c05611a745beb25e7c088db74cfa/Messages/*.blob"
 					},
 					{
 						"name": "Destination",
@@ -66,428 +66,307 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['time']"
+									"path": "$['message'][0]['raw']"
 								},
 								"sink": {
-									"name": "time",
+									"name": "MessageRaw",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['resourceId']"
+									"path": "$['message'][0]['severityLevel']"
 								},
 								"sink": {
-									"name": "resourceId",
+									"name": "MessageSeverityLevel",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['operationName']"
+									"path": "$['internal']['data']['id']"
 								},
 								"sink": {
-									"name": "operationName",
+									"name": "InternalDataId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"path": "$['internal']['data']['documentVersion']"
+								},
+								"sink": {
+									"name": "InternalDataDocVer",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['operationVersion']"
+									"path": "$['context']['application']['version']"
 								},
 								"sink": {
-									"name": "operationVersion",
+									"name": "ContextAppVersion",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['category']"
+									"path": "$['context']['data']['eventTime']"
 								},
 								"sink": {
-									"name": "category",
+									"name": "ContextDataEventTime",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['tenantId']"
+									"path": "$['context']['data']['isSynthetic']"
 								},
 								"sink": {
-									"name": "tenantId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['resultType']"
-								},
-								"sink": {
-									"name": "resultType",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['resultSignature']"
-								},
-								"sink": {
-									"name": "resultSignature",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['resultDescription']"
-								},
-								"sink": {
-									"name": "resultDescription",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['durationMs']"
-								},
-								"sink": {
-									"name": "durationMs",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['callerIpAddress']"
-								},
-								"sink": {
-									"name": "callerIpAddress",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['correlationId']"
-								},
-								"sink": {
-									"name": "correlationId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['identity']"
-								},
-								"sink": {
-									"name": "identity"
-								}
-							},
-							{
-								"source": {
-									"path": "$['Level']"
-								},
-								"sink": {
-									"name": "Level",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['id']"
-								},
-								"sink": {
-									"name": "PropId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['createdDateTime']"
-								},
-								"sink": {
-									"name": "PropCreatedDateTime",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['userDisplayName']"
-								},
-								"sink": {
-									"name": "PropUserDisplayName",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['userPrincipalName']"
-								},
-								"sink": {
-									"name": "PropUserPrincipalName",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['userId']"
-								},
-								"sink": {
-									"name": "PropUserId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['appId']"
-								},
-								"sink": {
-									"name": "PropAppId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['appDisplayName']"
-								},
-								"sink": {
-									"name": "PropAppDisplayName",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['ipAddress']"
-								},
-								"sink": {
-									"name": "PropIpAddress",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['status']['errorCode']"
-								},
-								"sink": {
-									"name": "PropStatusErrorCode",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['status']['failureReason']"
-								},
-								"sink": {
-									"name": "PropStatusFailureReason",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['userAgent']"
-								},
-								"sink": {
-									"name": "PropUserAgent",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['deviceDetail']['deviceId']"
-								},
-								"sink": {
-									"name": "PropDeviceDetailId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['deviceDetail']['operatingSystem']"
-								},
-								"sink": {
-									"name": "PropDeviceDetailOS",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['deviceDetail']['browser']"
-								},
-								"sink": {
-									"name": "PropDeviceDetailBrowser",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['location']['city']"
-								},
-								"sink": {
-									"name": "PropLocCity"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['location']['state']"
-								},
-								"sink": {
-									"name": "PropLocState"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['location']['countryOrRegion']"
-								},
-								"sink": {
-									"name": "PropLocCountryOrRegion"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['mfaDetail']['authMethod']"
-								},
-								"sink": {
-									"name": "PropMfaDetailAuthMethod",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['conditionalAccessStatus']"
-								},
-								"sink": {
-									"name": "PropConditionalAccessStatus",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['originalRequestId']"
-								},
-								"sink": {
-									"name": "PropOriginalRequestId",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['isInteractive']"
-								},
-								"sink": {
-									"name": "PropIsInteractive",
+									"name": "ContextDataIsSynthetic",
 									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['tokenIssuerName']"
+									"path": "$['context']['data']['samplingRate']"
 								},
 								"sink": {
-									"name": "PropTokenIssuerName",
+									"name": "ContextDataSamplingRate",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['tokenIssuerType']"
+									"path": "$['context']['device']['type']"
 								},
 								"sink": {
-									"name": "PropTokenIssuerType",
+									"name": "ContextDataDeviceType",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['processingTimeInMilliseconds']"
+									"path": "$['context']['device']['roleInstance']"
 								},
 								"sink": {
-									"name": "PropProcessingTimeInMilliseconds",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties']['riskDetail']"
-								},
-								"sink": {
-									"name": "PropRiskDetail",
+									"name": "ContextDataDeviceRoleInstance",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['riskLevelAggregated']"
+									"path": "$['context']['device']['roleName']"
 								},
 								"sink": {
-									"name": "PropRiskLevelAggregated",
+									"name": "ContextDataDeviceRoleName",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['riskLevelDuringSignIn']"
+									"path": "$['context']['session']['isFirst']"
 								},
 								"sink": {
-									"name": "PropRiskLevelDuringSignIn",
+									"name": "ContextDataSessionIsFirst",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['operation']['id']"
+								},
+								"sink": {
+									"name": "ContextDataOperationId",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['riskState']"
+									"path": "$['context']['operation']['parentId']"
 								},
 								"sink": {
-									"name": "PropRiskState",
+									"name": "ContextDataOperationParentId",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['resourceDisplayName']"
+									"path": "$['context']['operation']['name']"
 								},
 								"sink": {
-									"name": "PropResourceDisplayName",
+									"name": "ContextDataOperationName",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['authenticationRequirement']"
+									"path": "$['context']['location']['clientip']"
 								},
 								"sink": {
-									"name": "PropAuthenticationRequirement",
+									"name": "ContextLocationClientIp",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['servicePrincipalId']"
+									"path": "$['context']['location']['continent']"
 								},
 								"sink": {
-									"name": "PropServicePrincipalId",
+									"name": "ContextLocationContinent",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['accountType']"
+									"path": "$['context']['location']['country']"
 								},
 								"sink": {
-									"name": "PropAccountType",
-									"type": "Int32"
+									"name": "ContextLocationCountry",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['clientAppUsed']"
+									"path": "$['context']['custom']['dimensions'][0]['EventName']"
 								},
 								"sink": {
-									"name": "PropClientAppUsed"
+									"name": "ContextCustomDimEventName"
 								}
 							},
 							{
 								"source": {
-									"path": "$['properties']['resourceId']"
+									"path": "$['context']['custom']['dimensions'][0]['TraceId']"
 								},
 								"sink": {
-									"name": "PropResourceId"
+									"name": "ContextCustomDimTraceId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['CategoryName']"
+								},
+								"sink": {
+									"name": "ContextCustomDimCategoryName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['RequestId']"
+								},
+								"sink": {
+									"name": "ContextCustomDimRequestId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['ActionId']"
+								},
+								"sink": {
+									"name": "ContextCustomDimActionId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['{OriginalFormat}']"
+								},
+								"sink": {
+									"name": "ContextCustomDimOriginalFormat",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['ParentId']"
+								},
+								"sink": {
+									"name": "ContextCustomDimParentId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['RequestPath']"
+								},
+								"sink": {
+									"name": "ContextCustomDimRequestPath",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['AspNetCoreEnvironment']"
+								},
+								"sink": {
+									"name": "ContextCustomDimAspNetCoreEnvironment",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['EventId']"
+								},
+								"sink": {
+									"name": "ContextCustomDimEventId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimMethod']"
+								},
+								"sink": {
+									"name": "ContextCustomDimMethod",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['Scheme']"
+								},
+								"sink": {
+									"name": "ContextCustomDimScheme",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['Path']"
+								},
+								"sink": {
+									"name": "ContextCustomDimPath",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimProtocol']"
+								},
+								"sink": {
+									"name": "ContextCustomDimProtocol",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimHost']"
+								},
+								"sink": {
+									"name": "ContextCustomDimHost",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['QueryString']"
+								},
+								"sink": {
+									"name": "ContextCustomDimQueryString",
+									"type": "String"
 								}
 							},
 							{
@@ -497,14 +376,6 @@
 								"sink": {
 									"name": "PipelineRunId",
 									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['location']"
-								},
-								"sink": {
-									"name": "PropLocation"
 								}
 							}
 						],
