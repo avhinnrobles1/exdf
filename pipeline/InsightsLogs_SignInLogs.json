@@ -546,13 +546,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "InsightsLogsSignInLogsBlobJsonByDate_DS1",
+						"referenceName": "InsightsLogsSignInLogsBlobJsonByDate_DS",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "InsightsLogsSignInLogsTable_DS1",
+						"referenceName": "InsightsLogsSignInLogsTable_DS",
 						"type": "DatasetReference"
 					}
 				]

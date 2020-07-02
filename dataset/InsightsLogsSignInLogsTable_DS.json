@@ -1,5 +1,5 @@
 {
-	"name": "InsightsLogsSignInLogsTable_DS1",
+	"name": "InsightsLogsSignInLogsTable_DS",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "EXSQL_LS",
