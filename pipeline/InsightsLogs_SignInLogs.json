@@ -379,7 +379,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "InsightsLogsAuditLogsBlobJsonByDate_DS",
+						"referenceName": "InsightsLogsSignInLogsBlobJsonByDate_DS",
 						"type": "DatasetReference"
 					}
 				],
