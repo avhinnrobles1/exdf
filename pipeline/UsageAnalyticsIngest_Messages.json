@@ -1,0 +1,590 @@
+{
+	"name": "UsageAnalyticsIngest_Messages",
+	"properties": {
+		"activities": [
+			{
+				"name": "ETL Telemetry",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Default Value If DateToLoad is Empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "exsav2-ai-container/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42/*.json"
+					},
+					{
+						"name": "Destination",
+						"value": "UsageAnalytics.Messages"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "PipelineRunId",
+								"value": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@variables('DateToLoad')",
+								"type": "Expression"
+							},
+							"wildcardFolderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
+							"wildcardFileName": "*.json",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['time']"
+								},
+								"sink": {
+									"name": "time",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['resourceId']"
+								},
+								"sink": {
+									"name": "resourceId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['operationName']"
+								},
+								"sink": {
+									"name": "operationName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['operationVersion']"
+								},
+								"sink": {
+									"name": "operationVersion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['category']"
+								},
+								"sink": {
+									"name": "category",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['tenantId']"
+								},
+								"sink": {
+									"name": "tenantId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['resultType']"
+								},
+								"sink": {
+									"name": "resultType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['resultSignature']"
+								},
+								"sink": {
+									"name": "resultSignature",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['resultDescription']"
+								},
+								"sink": {
+									"name": "resultDescription",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['durationMs']"
+								},
+								"sink": {
+									"name": "durationMs",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['callerIpAddress']"
+								},
+								"sink": {
+									"name": "callerIpAddress",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['correlationId']"
+								},
+								"sink": {
+									"name": "correlationId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['identity']"
+								},
+								"sink": {
+									"name": "identity"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Level']"
+								},
+								"sink": {
+									"name": "Level",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['id']"
+								},
+								"sink": {
+									"name": "PropId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['createdDateTime']"
+								},
+								"sink": {
+									"name": "PropCreatedDateTime",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['userDisplayName']"
+								},
+								"sink": {
+									"name": "PropUserDisplayName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['userPrincipalName']"
+								},
+								"sink": {
+									"name": "PropUserPrincipalName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['userId']"
+								},
+								"sink": {
+									"name": "PropUserId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['appId']"
+								},
+								"sink": {
+									"name": "PropAppId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['appDisplayName']"
+								},
+								"sink": {
+									"name": "PropAppDisplayName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['ipAddress']"
+								},
+								"sink": {
+									"name": "PropIpAddress",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['status']['errorCode']"
+								},
+								"sink": {
+									"name": "PropStatusErrorCode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['status']['failureReason']"
+								},
+								"sink": {
+									"name": "PropStatusFailureReason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['userAgent']"
+								},
+								"sink": {
+									"name": "PropUserAgent",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['deviceDetail']['deviceId']"
+								},
+								"sink": {
+									"name": "PropDeviceDetailId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['deviceDetail']['operatingSystem']"
+								},
+								"sink": {
+									"name": "PropDeviceDetailOS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['deviceDetail']['browser']"
+								},
+								"sink": {
+									"name": "PropDeviceDetailBrowser",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['location']['city']"
+								},
+								"sink": {
+									"name": "PropLocCity"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['location']['state']"
+								},
+								"sink": {
+									"name": "PropLocState"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['location']['countryOrRegion']"
+								},
+								"sink": {
+									"name": "PropLocCountryOrRegion"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['mfaDetail']['authMethod']"
+								},
+								"sink": {
+									"name": "PropMfaDetailAuthMethod",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['conditionalAccessStatus']"
+								},
+								"sink": {
+									"name": "PropConditionalAccessStatus",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['originalRequestId']"
+								},
+								"sink": {
+									"name": "PropOriginalRequestId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['isInteractive']"
+								},
+								"sink": {
+									"name": "PropIsInteractive",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['tokenIssuerName']"
+								},
+								"sink": {
+									"name": "PropTokenIssuerName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['tokenIssuerType']"
+								},
+								"sink": {
+									"name": "PropTokenIssuerType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['processingTimeInMilliseconds']"
+								},
+								"sink": {
+									"name": "PropProcessingTimeInMilliseconds",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['riskDetail']"
+								},
+								"sink": {
+									"name": "PropRiskDetail",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['riskLevelAggregated']"
+								},
+								"sink": {
+									"name": "PropRiskLevelAggregated",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['riskLevelDuringSignIn']"
+								},
+								"sink": {
+									"name": "PropRiskLevelDuringSignIn",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['riskState']"
+								},
+								"sink": {
+									"name": "PropRiskState",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['resourceDisplayName']"
+								},
+								"sink": {
+									"name": "PropResourceDisplayName",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['authenticationRequirement']"
+								},
+								"sink": {
+									"name": "PropAuthenticationRequirement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['servicePrincipalId']"
+								},
+								"sink": {
+									"name": "PropServicePrincipalId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['accountType']"
+								},
+								"sink": {
+									"name": "PropAccountType",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['clientAppUsed']"
+								},
+								"sink": {
+									"name": "PropClientAppUsed"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties']['resourceId']"
+								},
+								"sink": {
+									"name": "PropResourceId"
+								}
+							},
+							{
+								"source": {
+									"path": "$['PipelineRunId']"
+								},
+								"sink": {
+									"name": "PipelineRunId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['location']"
+								},
+								"sink": {
+									"name": "PropLocation"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": false
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS1",
+						"type": "DatasetReference",
+						"parameters": {
+							"DateToLoad": {
+								"value": "@variables('DateToLoad')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "UsageAnalyticsTelemetryMessagesTable_DS1",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Default Value If DateToLoad is Empty",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set DateToLoad to Parameter Value",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@pipeline().parameters.DateToLoad",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set DateToLoad to Default",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"DateToLoad": {
+				"type": "string",
+				"defaultValue": "PreviousDate"
+			}
+		},
+		"variables": {
+			"DateToLoad": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}

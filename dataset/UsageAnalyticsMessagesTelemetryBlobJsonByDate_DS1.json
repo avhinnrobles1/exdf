@@ -1,0 +1,248 @@
+{
+	"name": "UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "EXAI_LS",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"DateToLoad": {
+				"type": "string",
+				"defaultValue": "PreviousDate"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": {
+					"value": "@concat('exai_c332c05611a745beb25e7c088db74cfa/Messages/', dataset().DateToLoad)",
+					"type": "Expression"
+				},
+				"container": "exsav2-ai-container"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"time": {
+					"type": "string"
+				},
+				"resourceId": {
+					"type": "string"
+				},
+				"operationName": {
+					"type": "string"
+				},
+				"operationVersion": {
+					"type": "string"
+				},
+				"category": {
+					"type": "string"
+				},
+				"tenantId": {
+					"type": "string"
+				},
+				"resultType": {
+					"type": "string"
+				},
+				"resultSignature": {
+					"type": "string"
+				},
+				"resultDescription": {
+					"type": "string"
+				},
+				"durationMs": {
+					"type": "integer"
+				},
+				"callerIpAddress": {
+					"type": "string"
+				},
+				"correlationId": {
+					"type": "string"
+				},
+				"identity": {
+					"type": "string"
+				},
+				"Level": {
+					"type": "integer"
+				},
+				"properties": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string"
+						},
+						"createdDateTime": {
+							"type": "string"
+						},
+						"userDisplayName": {
+							"type": "string"
+						},
+						"userPrincipalName": {
+							"type": "string"
+						},
+						"userId": {
+							"type": "string"
+						},
+						"appId": {
+							"type": "string"
+						},
+						"appDisplayName": {
+							"type": "string"
+						},
+						"ipAddress": {
+							"type": "string"
+						},
+						"status": {
+							"type": "object",
+							"properties": {
+								"errorCode": {
+									"type": "integer"
+								},
+								"failureReason": {
+									"type": "string"
+								},
+								"additionalDetails": {
+									"type": "string"
+								}
+							}
+						},
+						"userAgent": {
+							"type": "string"
+						},
+						"deviceDetail": {
+							"type": "object",
+							"properties": {
+								"deviceId": {
+									"type": "string"
+								},
+								"operatingSystem": {
+									"type": "string"
+								},
+								"browser": {
+									"type": "string"
+								}
+							}
+						},
+						"location": {
+							"type": "object",
+							"properties": {
+								"geoCoordinates": {
+									"type": "object",
+									"properties": {
+										"latitude": {
+											"type": "number"
+										},
+										"longitude": {
+											"type": "number"
+										}
+									}
+								},
+								"city": {
+									"type": "string"
+								},
+								"state": {
+									"type": "string"
+								},
+								"countryOrRegion": {
+									"type": "string"
+								}
+							}
+						},
+						"mfaDetail": {
+							"type": "object",
+							"properties": {
+								"authMethod": {
+									"type": "string"
+								},
+								"authDetail": {
+									"type": "string"
+								}
+							}
+						},
+						"correlationId": {
+							"type": "string"
+						},
+						"conditionalAccessStatus": {
+							"type": "string"
+						},
+						"appliedConditionalAccessPolicies": {
+							"type": "array"
+						},
+						"originalRequestId": {
+							"type": "string"
+						},
+						"isInteractive": {
+							"type": "boolean"
+						},
+						"tokenIssuerName": {
+							"type": "string"
+						},
+						"tokenIssuerType": {
+							"type": "string"
+						},
+						"authenticationProcessingDetails": {
+							"type": "array"
+						},
+						"networkLocationDetails": {
+							"type": "array"
+						},
+						"processingTimeInMilliseconds": {
+							"type": "integer"
+						},
+						"riskDetail": {
+							"type": "string"
+						},
+						"riskLevelAggregated": {
+							"type": "string"
+						},
+						"riskLevelDuringSignIn": {
+							"type": "string"
+						},
+						"riskState": {
+							"type": "string"
+						},
+						"riskEventTypes": {
+							"type": "array"
+						},
+						"riskEventTypes_v2": {
+							"type": "array"
+						},
+						"resourceDisplayName": {
+							"type": "string"
+						},
+						"authenticationDetails": {
+							"type": "array"
+						},
+						"authenticationRequirementPolicies": {
+							"type": "array"
+						},
+						"authenticationRequirement": {
+							"type": "string"
+						},
+						"servicePrincipalId": {
+							"type": "string"
+						},
+						"accountType": {
+							"type": "integer"
+						},
+						"clientAppUsed": {
+							"type": "string"
+						},
+						"resourceId": {
+							"type": "string"
+						},
+						"alternateSignInName": {
+							"type": "string"
+						}
+					}
+				},
+				"location": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
