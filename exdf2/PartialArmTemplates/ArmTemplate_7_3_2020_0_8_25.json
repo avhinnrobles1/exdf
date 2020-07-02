@@ -1,0 +1,1017 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "exdf2"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsIngest_Messages')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ETL Telemetry",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Default Value If DateToLoad is Empty",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "exsav2-ai-container/exai_c332c05611a745beb25e7c088db74cfa/Messages/*.blob"
+							},
+							{
+								"name": "Destination",
+								"value": "UsageAnalytics.Messages"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"additionalColumns": [
+									{
+										"name": "PipelineRunId",
+										"value": {
+											"value": "@pipeline().RunId",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"modifiedDatetimeStart": {
+										"value": "@variables('DateToLoad')",
+										"type": "Expression"
+									},
+									"wildcardFolderPath": {
+										"value": "@concat('exai_c332c05611a745beb25e7c088db74cfa/Messages/', variables('DateToLoad'))",
+										"type": "Expression"
+									},
+									"wildcardFileName": "*.blob",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['message'][0]['raw']"
+										},
+										"sink": {
+											"name": "MessageRaw",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['message'][0]['severityLevel']"
+										},
+										"sink": {
+											"name": "MessageSeverityLevel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['internal']['data']['id']"
+										},
+										"sink": {
+											"name": "InternalDataId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"path": "$['internal']['data']['documentVersion']"
+										},
+										"sink": {
+											"name": "InternalDataDocVer",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['application']['version']"
+										},
+										"sink": {
+											"name": "ContextAppVersion",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['data']['eventTime']"
+										},
+										"sink": {
+											"name": "ContextDataEventTime",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['data']['isSynthetic']"
+										},
+										"sink": {
+											"name": "ContextDataIsSynthetic",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['data']['samplingRate']"
+										},
+										"sink": {
+											"name": "ContextDataSamplingRate",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['device']['type']"
+										},
+										"sink": {
+											"name": "ContextDataDeviceType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['device']['roleInstance']"
+										},
+										"sink": {
+											"name": "ContextDataDeviceRoleInstance",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['device']['roleName']"
+										},
+										"sink": {
+											"name": "ContextDataDeviceRoleName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['session']['isFirst']"
+										},
+										"sink": {
+											"name": "ContextDataSessionIsFirst",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['operation']['id']"
+										},
+										"sink": {
+											"name": "ContextDataOperationId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['operation']['parentId']"
+										},
+										"sink": {
+											"name": "ContextDataOperationParentId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['operation']['name']"
+										},
+										"sink": {
+											"name": "ContextDataOperationName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['location']['clientip']"
+										},
+										"sink": {
+											"name": "ContextLocationClientIp",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['location']['continent']"
+										},
+										"sink": {
+											"name": "ContextLocationContinent",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['location']['country']"
+										},
+										"sink": {
+											"name": "ContextLocationCountry",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['EventName']"
+										},
+										"sink": {
+											"name": "ContextCustomDimEventName"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['TraceId']"
+										},
+										"sink": {
+											"name": "ContextCustomDimTraceId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['CategoryName']"
+										},
+										"sink": {
+											"name": "ContextCustomDimCategoryName",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['RequestId']"
+										},
+										"sink": {
+											"name": "ContextCustomDimRequestId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['ActionId']"
+										},
+										"sink": {
+											"name": "ContextCustomDimActionId",
+											"type": "Guid"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['{OriginalFormat}']"
+										},
+										"sink": {
+											"name": "ContextCustomDimOriginalFormat",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['ParentId']"
+										},
+										"sink": {
+											"name": "ContextCustomDimParentId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['RequestPath']"
+										},
+										"sink": {
+											"name": "ContextCustomDimRequestPath",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['AspNetCoreEnvironment']"
+										},
+										"sink": {
+											"name": "ContextCustomDimAspNetCoreEnvironment",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['EventId']"
+										},
+										"sink": {
+											"name": "ContextCustomDimEventId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimMethod']"
+										},
+										"sink": {
+											"name": "ContextCustomDimMethod",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['Scheme']"
+										},
+										"sink": {
+											"name": "ContextCustomDimScheme",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['Path']"
+										},
+										"sink": {
+											"name": "ContextCustomDimPath",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimProtocol']"
+										},
+										"sink": {
+											"name": "ContextCustomDimProtocol",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['ContextCustomDimHost']"
+										},
+										"sink": {
+											"name": "ContextCustomDimHost",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['context']['custom']['dimensions'][0]['QueryString']"
+										},
+										"sink": {
+											"name": "ContextCustomDimQueryString",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['PipelineRunId']"
+										},
+										"sink": {
+											"name": "PipelineRunId",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": false
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS",
+								"type": "DatasetReference",
+								"parameters": {
+									"DateToLoad": {
+										"value": "@variables('DateToLoad')",
+										"type": "Expression"
+									}
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "UsageAnalyticsTelemetryMessagesTable_DS1",
+								"type": "DatasetReference"
+							}
+						]
+					},
+					{
+						"name": "Default Value If DateToLoad is Empty",
+						"type": "IfCondition",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
+								"type": "Expression"
+							},
+							"ifFalseActivities": [
+								{
+									"name": "Set DateToLoad to Parameter Value",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "DateToLoad",
+										"value": {
+											"value": "@pipeline().parameters.DateToLoad",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"ifTrueActivities": [
+								{
+									"name": "Set DateToLoad to Default",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "DateToLoad",
+										"value": {
+											"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"parameters": {
+					"DateToLoad": {
+						"type": "string",
+						"defaultValue": "PreviousDate"
+					}
+				},
+				"variables": {
+					"DateToLoad": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS')]",
+				"[concat(variables('factoryId'), '/datasets/UsageAnalyticsTelemetryMessagesTable_DS1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsMessagesTelemetryBlobJsonByDate_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EXAI_LS",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"DateToLoad": {
+						"type": "string",
+						"defaultValue": "PreviousDate"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "*.blob",
+						"folderPath": {
+							"value": "@concat('exai_c332c05611a745beb25e7c088db74cfa/Messages/', dataset().DateToLoad)",
+							"type": "Expression"
+						},
+						"container": "exsav2-ai-container"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"message": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"raw": {
+										"type": "string"
+									},
+									"severityLevel": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"internal": {
+							"type": "object",
+							"properties": {
+								"data": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"documentVersion": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"context": {
+							"type": "object",
+							"properties": {
+								"application": {
+									"type": "object",
+									"properties": {
+										"version": {
+											"type": "string"
+										}
+									}
+								},
+								"data": {
+									"type": "object",
+									"properties": {
+										"eventTime": {
+											"type": "string"
+										},
+										"isSynthetic": {
+											"type": "boolean"
+										},
+										"samplingRate": {
+											"type": "number"
+										}
+									}
+								},
+								"cloud": {
+									"type": "object"
+								},
+								"device": {
+									"type": "object",
+									"properties": {
+										"type": {
+											"type": "string"
+										},
+										"roleName": {
+											"type": "string"
+										},
+										"roleInstance": {
+											"type": "string"
+										},
+										"screenResolution": {
+											"type": "object"
+										}
+									}
+								},
+								"session": {
+									"type": "object",
+									"properties": {
+										"isFirst": {
+											"type": "boolean"
+										}
+									}
+								},
+								"operation": {
+									"type": "object",
+									"properties": {
+										"id": {
+											"type": "string"
+										},
+										"parentId": {
+											"type": "string"
+										},
+										"name": {
+											"type": "string"
+										}
+									}
+								},
+								"location": {
+									"type": "object",
+									"properties": {
+										"clientip": {
+											"type": "string"
+										},
+										"continent": {
+											"type": "string"
+										},
+										"country": {
+											"type": "string"
+										}
+									}
+								},
+								"custom": {
+									"type": "object",
+									"properties": {
+										"dimensions": {
+											"type": "array",
+											"items": {
+												"type": "object",
+												"properties": {
+													"TraceId": {
+														"type": "string"
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryMessagesTable_DS')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EXSQL_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "MessageRaw",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MessageSeverityLevel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "InternalDataDocVer",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextAppVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataEventTime",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataIsSynthetic",
+						"type": "bit"
+					},
+					{
+						"name": "ContextDataSamplingRate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataDeviceType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataDeviceRoleName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataDeviceRoleInstance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextDataOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataOperationName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationClientIp",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimTraceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimCategoryName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimRequestId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimActionId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ContextCustomDimOriginalFormat",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimRequestPath",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimAspNetCoreEnvironment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimEventId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimMethod",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimScheme",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimPath",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimProtocol",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimQueryString",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PipelineRunId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Messages"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UsageAnalyticsTelemetryMessagesTable_DS1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "EXSQL_LS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "MessageRaw",
+						"type": "nvarchar"
+					},
+					{
+						"name": "MessageSeverityLevel",
+						"type": "nvarchar"
+					},
+					{
+						"name": "InternalDataId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "InternalDataDocVer",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextAppVersion",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataEventTime",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataIsSynthetic",
+						"type": "bit"
+					},
+					{
+						"name": "ContextDataSamplingRate",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataDeviceType",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataDeviceRoleName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataDeviceRoleInstance",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataSessionIsFirst",
+						"type": "bit"
+					},
+					{
+						"name": "ContextDataOperationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataOperationParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextDataOperationName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationClientIp",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationContinent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextLocationCountry",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimTraceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimCategoryName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimRequestId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimActionId",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ContextCustomDimOriginalFormat",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimParentId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimRequestPath",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimAspNetCoreEnvironment",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimEventId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimMethod",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimScheme",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimPath",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimProtocol",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimHost",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ContextCustomDimQueryString",
+						"type": "nvarchar"
+					},
+					{
+						"name": "PipelineRunId",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "UsageAnalytics",
+					"table": "Messages"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DailyBackup_TRIGGER')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "UsageAnalyticsIngest",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"TelemetryDateFolder": "PreviousDate",
+							"RunBy": "System"
+						}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "InsightsLogs_AuditLogs",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"DateToLoad": "PreviousDate"
+						}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "InsightsLogs_SignInLogs",
+							"type": "PipelineReference"
+						}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "UsageAnalyticsIngest_Messages",
+							"type": "PipelineReference"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2020-06-09T01:00:00.000Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/UsageAnalyticsIngest_Messages')]"
+			]
+		}
+	]
+}

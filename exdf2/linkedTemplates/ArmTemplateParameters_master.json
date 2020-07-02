@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "exdf2"
+		},
+		"EXAI_LS_connectionString": {
+			"value": ""
+		},
+		"EXSQL_LS_connectionString": {
+			"value": ""
+		},
+		"DailyBackup_TRIGGER_properties_UsageAnalyticsIngest_parameters_TelemetryDateFolder": {
+			"value": "PreviousDate"
+		},
+		"DailyBackup_TRIGGER_properties_UsageAnalyticsIngest_parameters_RunBy": {
+			"value": "System"
+		},
+		"DailyBackup_TRIGGER_properties_InsightsLogs_AuditLogs_parameters_DateToLoad": {
+			"value": "PreviousDate"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
