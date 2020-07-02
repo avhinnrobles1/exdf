@@ -1,0 +1,141 @@
+{
+	"name": "InsightsLogs_SignInLogs",
+	"properties": {
+		"activities": [
+			{
+				"name": "ETL SignIn Logs",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Default Value If DateToLoad is Empty",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "insights-logs-signinlogs/tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42/*.json"
+					},
+					{
+						"name": "Destination",
+						"value": "InsightsLogs.SignInLogs"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "PipelineRunId",
+								"value": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@variables('DateToLoad')",
+								"type": "Expression"
+							},
+							"wildcardFolderPath": "tenantId=42032c36-c513-4d46-bec4-303b1d4e6c42",
+							"wildcardFileName": {
+								"value": "*.json",
+								"type": "Expression"
+							},
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mapComplexValuesToString": false
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "InsightsLogsSignInLogsBlobJsonByDate_DS1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "InsightsLogsSignInLogsTable_DS1",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Default Value If DateToLoad is Empty",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@or(empty(pipeline().parameters.DateToLoad),equals(pipeline().parameters.DateToLoad,'PreviousDate'))",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set DateToLoad to Parameter Value",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@pipeline().parameters.DateToLoad",
+									"type": "Expression"
+								}
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set DateToLoad to Default",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "DateToLoad",
+								"value": {
+									"value": "@formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-dd')",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"DateToLoad": {
+				"type": "string",
+				"defaultValue": "PreviousDate"
+			}
+		},
+		"variables": {
+			"DateToLoad": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
