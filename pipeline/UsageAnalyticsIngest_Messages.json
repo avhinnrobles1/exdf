@@ -346,22 +346,6 @@
 							},
 							{
 								"source": {
-									"path": "$['context']['custom']['dimensions'][0]['RequestId']"
-								},
-								"sink": {
-									"name": "ContextCustomDimRequestId"
-								}
-							},
-							{
-								"source": {
-									"path": "$['context']['custom']['dimensions'][0]['ActionId']"
-								},
-								"sink": {
-									"name": "ContextCustomDimActionId"
-								}
-							},
-							{
-								"source": {
 									"path": "$['PipelineRunId']"
 								},
 								"sink": {
