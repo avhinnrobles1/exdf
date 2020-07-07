@@ -249,6 +249,24 @@
 							},
 							{
 								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['RequestId']"
+								},
+								"sink": {
+									"name": "ContextCustomDimRequestId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['context']['custom']['dimensions'][0]['ActionId']"
+								},
+								"sink": {
+									"name": "ContextCustomDimActionId",
+									"type": "Guid"
+								}
+							},
+							{
+								"source": {
 									"path": "$['context']['custom']['dimensions'][0]['{OriginalFormat}']"
 								},
 								"sink": {
