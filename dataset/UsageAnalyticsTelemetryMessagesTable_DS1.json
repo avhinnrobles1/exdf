@@ -17,6 +17,10 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "InternalDataId",
+				"type": "varchar"
+			},
+			{
 				"name": "InternalDataDocVer",
 				"type": "nvarchar"
 			},
