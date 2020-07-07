@@ -5344,8 +5344,15 @@
 											"path": "$['internal']['data']['documentVersion']"
 										},
 										"sink": {
-											"name": "InternalDataDocVer",
-											"type": "String"
+											"name": "InternalDataDocVer"
+										}
+									},
+									{
+										"source": {
+											"path": "$['internal']['data']['id']"
+										},
+										"sink": {
+											"name": "InternalDataId"
 										}
 									},
 									{
@@ -14206,6 +14213,10 @@
 					{
 						"name": "MessageSeverityLevel",
 						"type": "nvarchar"
+					},
+					{
+						"name": "InternalDataId",
+						"type": "varchar"
 					},
 					{
 						"name": "InternalDataDocVer",
