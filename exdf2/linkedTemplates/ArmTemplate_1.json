@@ -5137,7 +5137,9 @@
 										"source": {
 											"path": "$['PipelineRunId']"
 										},
-										"sink": {}
+										"sink": {
+											"name": "PipelineRunId"
+										}
 									}
 								],
 								"collectionReference": "",
