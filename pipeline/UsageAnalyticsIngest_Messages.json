@@ -336,14 +336,6 @@
 									"name": "ContextCustomDimQueryString",
 									"type": "String"
 								}
-							},
-							{
-								"source": {
-									"path": "$['PipelineRunId']"
-								},
-								"sink": {
-									"name": "PipelineRunId"
-								}
 							}
 						],
 						"collectionReference": "",
