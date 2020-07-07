@@ -89,6 +89,14 @@
 				"type": "nvarchar"
 			},
 			{
+				"name": "ContextCustomDimRequestId",
+				"type": "varchar"
+			},
+			{
+				"name": "ContextCustomDimActionId",
+				"type": "varchar"
+			},
+			{
 				"name": "ContextCustomDimOriginalFormat",
 				"type": "nvarchar"
 			},
