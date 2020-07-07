@@ -5590,14 +5590,6 @@
 											"name": "ContextCustomDimQueryString",
 											"type": "String"
 										}
-									},
-									{
-										"source": {
-											"path": "$['PipelineRunId']"
-										},
-										"sink": {
-											"name": "PipelineRunId"
-										}
 									}
 								],
 								"collectionReference": "",
@@ -14318,10 +14310,6 @@
 					{
 						"name": "ContextCustomDimQueryString",
 						"type": "nvarchar"
-					},
-					{
-						"name": "PipelineRunId",
-						"type": "uniqueidentifier"
 					}
 				],
 				"typeProperties": {
