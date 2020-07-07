@@ -342,8 +342,7 @@
 									"path": "$['PipelineRunId']"
 								},
 								"sink": {
-									"name": "PipelineRunId",
-									"type": "String"
+									"name": "PipelineRunId"
 								}
 							}
 						],
