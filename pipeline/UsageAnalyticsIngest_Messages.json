@@ -87,15 +87,6 @@
 							},
 							{
 								"source": {
-									"path": "$['internal']['data']['id']"
-								},
-								"sink": {
-									"name": "InternalDataId",
-									"type": "Guid"
-								}
-							},
-							{
-								"source": {
 									"path": "$['internal']['data']['documentVersion']"
 								},
 								"sink": {
@@ -357,7 +348,7 @@
 							}
 						],
 						"collectionReference": "",
-						"mapComplexValuesToString": false
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
