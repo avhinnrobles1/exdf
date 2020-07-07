@@ -5596,8 +5596,7 @@
 											"path": "$['PipelineRunId']"
 										},
 										"sink": {
-											"name": "PipelineRunId",
-											"type": "String"
+											"name": "PipelineRunId"
 										}
 									}
 								],
@@ -14209,10 +14208,6 @@
 						"type": "nvarchar"
 					},
 					{
-						"name": "InternalDataId",
-						"type": "uniqueidentifier"
-					},
-					{
 						"name": "InternalDataDocVer",
 						"type": "nvarchar"
 					},
@@ -14281,14 +14276,6 @@
 						"type": "nvarchar"
 					},
 					{
-						"name": "ContextCustomDimRequestId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "ContextCustomDimActionId",
-						"type": "uniqueidentifier"
-					},
-					{
 						"name": "ContextCustomDimOriginalFormat",
 						"type": "nvarchar"
 					},
@@ -14334,7 +14321,7 @@
 					},
 					{
 						"name": "PipelineRunId",
-						"type": "nvarchar"
+						"type": "uniqueidentifier"
 					}
 				],
 				"typeProperties": {
