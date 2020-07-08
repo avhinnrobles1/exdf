@@ -193,10 +193,6 @@
 				"precision": 10
 			},
 			{
-				"name": "PropLocation",
-				"type": "nvarchar"
-			},
-			{
 				"name": "PipelineRunId",
 				"type": "nvarchar"
 			}
