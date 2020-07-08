@@ -193,10 +193,6 @@
 				"precision": 10
 			},
 			{
-				"name": "PropClientAppUsed",
-				"type": "nvarchar"
-			},
-			{
 				"name": "PropResourceId",
 				"type": "nvarchar"
 			},
