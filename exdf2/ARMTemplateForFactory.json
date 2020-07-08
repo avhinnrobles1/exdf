@@ -945,14 +945,6 @@
 									},
 									{
 										"source": {
-											"path": "$['properties']['resourceId']"
-										},
-										"sink": {
-											"name": "PropResourceId"
-										}
-									},
-									{
-										"source": {
 											"path": "$['PipelineRunId']"
 										},
 										"sink": {
@@ -12408,10 +12400,6 @@
 						"name": "PropAccountType",
 						"type": "int",
 						"precision": 10
-					},
-					{
-						"name": "PropResourceId",
-						"type": "nvarchar"
 					},
 					{
 						"name": "PropLocation",
