@@ -951,14 +951,6 @@
 											"name": "PipelineRunId",
 											"type": "String"
 										}
-									},
-									{
-										"source": {
-											"path": "$['location']"
-										},
-										"sink": {
-											"name": "PropLocation"
-										}
 									}
 								],
 								"collectionReference": "",
@@ -12400,10 +12392,6 @@
 						"name": "PropAccountType",
 						"type": "int",
 						"precision": 10
-					},
-					{
-						"name": "PropLocation",
-						"type": "nvarchar"
 					},
 					{
 						"name": "PipelineRunId",
