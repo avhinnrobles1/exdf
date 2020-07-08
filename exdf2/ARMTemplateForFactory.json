@@ -810,30 +810,6 @@
 									},
 									{
 										"source": {
-											"path": "$['properties']['location']['city']"
-										},
-										"sink": {
-											"name": "PropLocCity"
-										}
-									},
-									{
-										"source": {
-											"path": "$['properties']['location']['state']"
-										},
-										"sink": {
-											"name": "PropLocState"
-										}
-									},
-									{
-										"source": {
-											"path": "$['properties']['location']['countryOrRegion']"
-										},
-										"sink": {
-											"name": "PropLocCountryOrRegion"
-										}
-									},
-									{
-										"source": {
 											"path": "$['properties']['mfaDetail']['authMethod']"
 										},
 										"sink": {
@@ -12380,23 +12356,7 @@
 						"type": "nvarchar"
 					},
 					{
-						"name": "PropLocCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PropLocState",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PropLocCountryOrRegion",
-						"type": "nvarchar"
-					},
-					{
 						"name": "PropMfaDetailAuthMethod",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PropMfaDetailAuthDetail",
 						"type": "nvarchar"
 					},
 					{
@@ -12463,10 +12423,6 @@
 					},
 					{
 						"name": "PropResourceId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PropAlternateSignInName",
 						"type": "nvarchar"
 					},
 					{

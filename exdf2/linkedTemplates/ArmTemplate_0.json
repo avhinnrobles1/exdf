@@ -804,23 +804,7 @@
 						"type": "nvarchar"
 					},
 					{
-						"name": "PropLocCity",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PropLocState",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PropLocCountryOrRegion",
-						"type": "nvarchar"
-					},
-					{
 						"name": "PropMfaDetailAuthMethod",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PropMfaDetailAuthDetail",
 						"type": "nvarchar"
 					},
 					{
@@ -887,10 +871,6 @@
 					},
 					{
 						"name": "PropResourceId",
-						"type": "nvarchar"
-					},
-					{
-						"name": "PropAlternateSignInName",
 						"type": "nvarchar"
 					},
 					{
