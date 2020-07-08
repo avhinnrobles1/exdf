@@ -458,14 +458,6 @@
 									"name": "PipelineRunId",
 									"type": "String"
 								}
-							},
-							{
-								"source": {
-									"path": "$['location']"
-								},
-								"sink": {
-									"name": "PropLocation"
-								}
 							}
 						],
 						"collectionReference": "",
