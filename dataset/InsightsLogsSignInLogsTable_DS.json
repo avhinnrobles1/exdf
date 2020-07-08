@@ -193,10 +193,6 @@
 				"precision": 10
 			},
 			{
-				"name": "PropResourceId",
-				"type": "nvarchar"
-			},
-			{
 				"name": "PropLocation",
 				"type": "nvarchar"
 			},

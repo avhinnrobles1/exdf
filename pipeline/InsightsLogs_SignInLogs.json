@@ -452,14 +452,6 @@
 							},
 							{
 								"source": {
-									"path": "$['properties']['resourceId']"
-								},
-								"sink": {
-									"name": "PropResourceId"
-								}
-							},
-							{
-								"source": {
 									"path": "$['PipelineRunId']"
 								},
 								"sink": {
