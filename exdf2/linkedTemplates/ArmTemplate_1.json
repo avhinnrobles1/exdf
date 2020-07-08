@@ -2714,14 +2714,6 @@
 									},
 									{
 										"source": {
-											"path": "$['properties']['clientAppUsed']"
-										},
-										"sink": {
-											"name": "PropClientAppUsed"
-										}
-									},
-									{
-										"source": {
 											"path": "$['properties']['resourceId']"
 										},
 										"sink": {

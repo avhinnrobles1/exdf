@@ -945,14 +945,6 @@
 									},
 									{
 										"source": {
-											"path": "$['properties']['clientAppUsed']"
-										},
-										"sink": {
-											"name": "PropClientAppUsed"
-										}
-									},
-									{
-										"source": {
 											"path": "$['properties']['resourceId']"
 										},
 										"sink": {
@@ -12416,10 +12408,6 @@
 						"name": "PropAccountType",
 						"type": "int",
 						"precision": 10
-					},
-					{
-						"name": "PropClientAppUsed",
-						"type": "nvarchar"
 					},
 					{
 						"name": "PropResourceId",
