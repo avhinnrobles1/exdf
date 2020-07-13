@@ -18,10 +18,10 @@
 				"type": "AzureBlobStorageLocation",
 				"fileName": "*.blob",
 				"folderPath": {
-					"value": "@concat('exai_c332c05611a745beb25e7c088db74cfa/Messages/', dataset().DateToLoad)",
+					"value": "@concat('az1.pex.ai_80fd3003ab2745f3b23ad777eda9dedf/Messages/', dataset().DateToLoad)",
 					"type": "Expression"
 				},
-				"container": "exsav2-ai-container"
+				"container": "az1-pex-ai-container"
 			}
 		},
 		"schema": {

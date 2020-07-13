@@ -23,7 +23,7 @@
 				"userProperties": [
 					{
 						"name": "Source",
-						"value": "exsav2-ai-container/exai_c332c05611a745beb25e7c088db74cfa/Messages/*.blob"
+						"value": "az1-pex-ai-container/az1.pex.ai_80fd3003ab2745f3b23ad777eda9dedf/Messages/*.blob"
 					},
 					{
 						"name": "Destination",
@@ -50,7 +50,7 @@
 								"type": "Expression"
 							},
 							"wildcardFolderPath": {
-								"value": "@concat('exai_c332c05611a745beb25e7c088db74cfa/Messages/', variables('DateToLoad'))",
+								"value": "@concat('az1.pex.ai_80fd3003ab2745f3b23ad777eda9dedf/Messages/', variables('DateToLoad'))",
 								"type": "Expression"
 							},
 							"wildcardFileName": "*.blob",
